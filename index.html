@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ElHaji Auto - Vente de Voitures Premium</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1a202c;
+      --secondary: #3182ce;
+      --accent: #e53e3e;
+      --light: #f9fafb;
+      --dark: #2c3e50;
+      --gray: #718096;
+      --success: #48bb78;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    
+    /* Header amélioré avec logo */
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo-icon {
+      background: var(--secondary);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+    }
+    
+    .logo-text h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    
+    .logo-text p {
+      font-size: 0.9rem;
+      color: #cbd5e0;
+    }
+    
+    /* Navigation améliorée */
+    nav {
+      display: flex;
+      background-color: var(--primary);
+      justify-content: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    nav a {
+      color: #cbd5e0;
+      padding: 16px 24px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    nav a:hover, 
+    nav a.active {
+      color: white;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 3px;
+      background: var(--secondary);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after,
+    nav a.active::after {
+      width: 80%;
+    }
+    
+    /* Hero section premium */
+    .hero {
+      position: relative;
+      background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 85vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      padding: 0 20px;
+      overflow: hidden;
+    }
+    
+    .hero-content {
+      max-width: 900px;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+    
+    .hero-content h1 {
+      font-size: 3.6rem;
+      margin-bottom: 20px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      line-height: 1.2;
+    }
+    
+    .hero-content p {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 35px;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    }
+    
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      padding: 16px 40px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .btn-primary {
+      background-color: var(--secondary);
+      color: white;
+      box-shadow: 0 8px 20px rgba(49,130,206,0.4);
+    }
+    
+    .btn-primary:hover {
+      background-color: #2b6cb0;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(49,130,206,0.6);
+    }
+    
+    .btn-secondary {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    
+    .btn-secondary:hover {
+      background-color: rgba(255,255,255,0.1);
+      transform: translateY(-3px);
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Sections générales */
+    .section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: none;
+    }
+    
+    .section.active {
+      display: block;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+    
+    .section-header p {
+      max-width: 700px;
+      margin: 25px auto 0;
+      color: var(--gray);
+      font-size: 1.1rem;
+    }
+    
+    /* Section Services */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .service-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      transition: all 0.4s ease;
+      text-align: center;
+      padding: 40px 25px;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(49,130,206,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      color: var(--secondary);
+      font-size: 2rem;
+    }
+    
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+    
+    .service-card p {
+      color: var(--gray);
+      line-height: 1.8;
+    }
+    
+    /* Section Voitures avec pagination */
+    .cars-container {
+      position: relative;
+    }
+    
+    .cars {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+    
+    .car {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .car:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .car-image {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .car-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .car:hover .car-image img {
+      transform: scale(1.05);
+    }
+    
+    .car-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: var(--accent);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    
+    .car-content {
+      padding: 25px;
+    }
+    
+    .car-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .car-header h3 {
+      font-size: 1.4rem;
+      color: var(--primary);
+    }
+    
+    .car-price {
+      color: var(--secondary);
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+    
+    .car-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .car-detail {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gray);
+    }
+    
+    .car-detail i {
+      color: var(--secondary);
+    }
+    
+    .car-cta {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: var(--secondary);
+      color: white;
+      text-align: center;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    
+    .car-cta:hover {
+      background: #2b6cb0;
+    }
+    
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .page-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 8px;
+      background: white;
+      color: var(--dark);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .page-btn:hover:not(.active) {
+      background: #edf2f7;
+    }
+    
+    .page-btn.active {
+      background: var(--secondary);
+      color: white;
+    }
+    
+    .page-btn.prev, .page-btn.next {
+      width: auto;
+      padding: 0 20px;
+      gap: 8px;
+    }
+    
+    .page-btn.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    /* Section À propos améliorée */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    
+    .about-image {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .about-text h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+    
+    .about-text p {
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+    
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 20px;
+      background: rgba(49,130,206,0.05);
+      border-radius: 10px;
+    }
+    
+    .stat-item .number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 5px;
+    }
+    
+    .stat-item .label {
+      color: var(--gray);
+      font-weight: 600;
+    }
+    
+    /* Section Contact avec formulaire */
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    
+    .contact-info {
+      background: linear-gradient(135deg, var(--primary), #2d3748);
+      color: white;
+      padding: 50px;
+    }
+    
+    .contact-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      position: relative;
+    }
+    
+    .contact-info h3::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--secondary);
+    }
+    
+    .contact-detail {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+      align-items: flex-start;
+    }
+    
+    .contact-icon {
+      background: rgba(255,255,255,0.1);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--secondary);
+    }
+    
+    .contact-text h4 {
+      margin-bottom: 5px;
+    }
+    
+    .contact-text p, 
+    .contact-text a {
+      color: #cbd5e0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .contact-text a:hover {
+      color: var(--secondary);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background: var(--secondary);
+      transform: translateY(-3px);
+    }
+    
+    .contact-form {
+      padding: 50px;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border 0.3s ease;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--secondary);
+    }
+    
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .submit-btn:hover {
+      background: #2b6cb0;
+    }
+    
+    /* Modal amélioré */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    
+    .modal-content {
+      background: white;
+      border-radius: 15px;
+      max-width: 900px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      animation: modalFadeIn 0.4s ease forwards;
+    }
+    
+    @keyframes modalFadeIn {
+      from {opacity: 0; transform: translateY(50px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #333;
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.3s ease;
+      background: rgba(255,255,255,0.8);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-close:hover {
+      color: var(--accent);
+    }
+    
+    .modal-header {
+      padding: 30px 30px 15px;
+    }
+    
+    .modal-header h3 {
+      font-size: 1.8rem;
+      color: var(--primary);
+    }
+    
+    .modal-price {
+      color: var(--secondary);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+    
+    .modal-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      padding: 0 30px 30px;
+    }
+    
+    .modal-images {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .main-image {
+      width: 100%;
+      height: 350px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .main-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .main-image:hover img {
+      transform: scale(1.05);
+    }
+    
+    .thumbnails {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+    
+    .thumbnail {
+      width: 80px;
+      height: 60px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      border: 2px solid transparent;
+    }
+    
+    .thumbnail:hover, 
+    .thumbnail.active {
+      opacity: 1;
+      transform: scale(1.05);
+      border-color: var(--secondary);
+    }
+    
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .modal-info {
+      padding: 10px 0;
+    }
+    
+    .car-specs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin: 25px 0;
+    }
+    
+    .spec-item {
+      background: #f8fafc;
+      padding: 15px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .spec-item i {
+      color: var(--secondary);
+      font-size: 1.2rem;
+    }
+    
+    .spec-text {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .spec-label {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    
+    .spec-value {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    .modal-description {
+      line-height: 1.8;
+      margin: 25px 0;
+    }
+    
+    .modal-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .modal-btn {
+      flex: 1;
+      padding: 15px;
+      text-align: center;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .btn-contact {
+      background: var(--secondary);
+      color: white;
+    }
+    
+    .btn-contact:hover {
+      background: #2b6cb0;
+    }
+    
+    .btn-testdrive {
+      background: transparent;
+      color: var(--secondary);
+      border: 2px solid var(--secondary);
+    }
+    
+    .btn-testdrive:hover {
+      background: rgba(49,130,206,0.1);
+    }
+    
+    /* Footer premium */
+    footer {
+      background: var(--primary);
+      color: white;
+      padding: 70px 0 30px;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+    
+    .footer-col h4 {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+      position: relative;
+    }
+    
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--secondary);
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: #cbd5e0;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .footer-links a:hover {
+      color: var(--secondary);
+      transform: translateX(5px);
+    }
+    
+    .footer-contact p {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+      color: #cbd5e0;
+    }
+    
+    .footer-contact i {
+      color: var(--secondary);
+      min-width: 20px;
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-social a:hover {
+      background: var(--secondary);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 40px;
+      margin-top: 50px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #a0aec0;
+      font-size: 0.9rem;
+    }
+    
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--secondary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      z-index: 100;
+      box-shadow: 0 5px 15px rgba(49,130,206,0.4);
+    }
+    
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background: #2b6cb0;
+      transform: translateY(-5px);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .about-content,
+      .contact-container,
+      .modal-main {
+        grid-template-columns: 1fr;
+      }
+      
+      .about-image {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+      
+      .section {
+        padding: 60px 20px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .section-header h2 {
+        font-size: 2rem;
+      }
+      
+      .car-specs {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-actions {
+        flex-direction: column;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      nav {
+        flex-wrap: wrap;
+      }
+      
+      nav a {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+      }
+      
+      .hero {
+        height: 75vh;
+        min-height: 500px;
+      }
+      
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .stat-item .number {
+        font-size: 2rem;
+      }
+      
+      .contact-info,
+      .contact-form {
+        padding: 30px 20px;
+      }
+      
+      .modal-content {
+        max-width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-car"></i>
+      </div>
+      <div class="logo-text">
+        <h1>ElHaji Auto</h1>
+        <p>Concessionnaire Premium au Maroc</p>
+      </div>
+    </div>
+    <div class="contact-header">
+      <p><i class="fas fa-phone"></i> +212 6 00 00 00 00</p>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="#accueil" class="active" data-section="accueil">Accueil</a>
+  <a href="#voitures" data-section="voitures">Voitures</a>
+  <a href="#services" data-section="services">Services</a>
+  <a href="#apropos" data-section="apropos">À propos</a>
+  <a href="#contact" data-section="contact">Contact</a>
+</nav>
+
+<section id="accueil" class="hero">
+  <div class="hero-content">
+    <h1>Votre Partenaire Automobile de Confiance au Maroc</h1>
+    <p>Découvrez notre sélection exclusive de véhicules neufs et d'occasion, avec un service premium et des garanties étendues.</p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary" data-section="voitures">
+        <i class="fas fa-car"></i> Voir nos véhicules
+      </button>
+      <button class="btn btn-secondary" data-section="contact">
+        <i class="fas fa-phone"></i> Prendre rendez-vous
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section">
+  <div class="section-header">
+    <h2>Nos Services Premium</h2>
+    <p>ElHaji Auto propose une gamme complète de services pour répondre à tous vos besoins automobiles</p>
+  </div>
+  
+  <div class="services">
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-car"></i>
+      </div>
+      <h3>Achat de Véhicules</h3>
+      <p>Découvrez notre large sélection de véhicules neufs et d'occasion, rigoureusement inspectés et garantis.</p>
+    </div>
+    
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-hand-holding-usd"></i>
+      </div>
+      <h3>Financement</h3>
+      <p>Solutions de financement sur mesure avec nos partenaires bancaires pour réaliser votre projet automobile.</p>
+    </div>
+    
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-sync-alt"></i>
+      </div>
+      <h3>Reprise</h3>
+      <p>Estimation gratuite et reprise de votre véhicule actuel au meilleur prix pour votre nouvel achat.</p>
+    </div>
+    
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-tools"></i>
+      </div>
+      <h3>Entretien & Réparation</h3>
+      <p>Atelier équipé avec des techniciens experts pour l'entretien et la réparation de votre véhicule.</p>
+    </div>
+  </div>
+</section>
+
+<section id="voitures" class="section">
+  <div class="section-header">
+    <h2>Notre Sélection de Véhicules</h2>
+    <p>Découvrez nos meilleures offres de voitures neuves et d'occasion</p>
+  </div>
+  
+  <div class="cars-container">
+    <div class="cars" id="carList">
+      <!-- Cars cards injected by JS -->
+    </div>
+    
+    <div class="pagination" id="pagination">
+      <!-- Pagination injected by JS -->
+    </div>
+  </div>
+</section>
+
+<section id="apropos" class="section">
+  <div class="section-header">
+    <h2>À Propos de ElHaji Auto</h2>
+    <p>Découvrez notre histoire et notre engagement envers l'excellence automobile</p>
+  </div>
+  
+  <div class="about-content">
+    <div class="about-image">
+      <img src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?auto=format&fit=crop&w=800&q=80" alt="Concession ElHaji Auto">
+    </div>
+    
+    <div class="about-text">
+      <h3>Notre Engagement Depuis 2010</h3>
+      <p>Fondée en 2010, ElHaji Auto s'est rapidement imposée comme un acteur majeur dans la vente de véhicules au Maroc grâce à son engagement envers la qualité, la transparence et la satisfaction client.</p>
+      <p>Notre équipe de professionnels passionnés vous accompagne à chaque étape de votre projet automobile, de la sélection du véhicule jusqu'à l'après-vente, en passant par le financement et la reprise.</p>
+      
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="number">12+</div>
+          <div class="label">Années d'expérience</div>
+        </div>
+        <div class="stat-item">
+          <div class="number">5K+</div>
+          <div class="label">Clients satisfaits</div>
+        </div>
+        <div class="stat-item">
+          <div class="number">98%</div>
+          <div class="label">Satisfaction client</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <div class="section-header">
+    <h2>Contactez-Nous</h2>
+    <p>Notre équipe est à votre disposition pour répondre à toutes vos questions</p>
+  </div>
+  
+  <div class="contact-container">
+    <div class="contact-info">
+      <h3>Nos Coordonnées</h3>
+      
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="contact-text">
+          <h4>Adresse</h4>
+          <p>123 Avenue Hassan II, Casablanca, Maroc</p>
+        </div>
+      </div>
+      
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <i class="fas fa-phone"></i>
+        </div>
+        <div class="contact-text">
+          <h4>Téléphone</h4>
+          <p>+212 6 00 00 00 00</p>
+        </div>
+      </div>
+      
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="contact-text">
+          <h4>Email</h4>
+          <a href="mailto:contact@elhajiauto.com">contact@elhajiauto.com</a>
+        </div>
+      </div>
+      
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <div class="contact-text">
+          <h4>Horaires</h4>
+          <p>Lun-Ven: 9h00-19h00<br>Sam: 9h00-13h00</p>
+        </div>
+      </div>
+      
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    
+    <div class="contact-form">
+      <h3>Envoyez-nous un message</h3>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Nom complet</label>
+          <input type="text" id="name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Téléphone</label>
+          <input type="tel" id="phone">
+        </div>
+        
+        <div class="form-group">
+          <label for="subject">Sujet</label>
+          <select id="subject">
+            <option value="info">Demande d'information</option>
+            <option value="rdv">Prendre rendez-vous</option>
+            <option value="test">Demande d'essai</option>
+            <option value="service">Service après-vente</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" required></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">Envoyer le message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-col">
+      <h4>ElHaji Auto</h4>
+      <p>Votre concessionnaire automobile de confiance au Maroc depuis 2010, offrant une sélection premium de véhicules neufs et d'occasion.</p>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    
+    <div class="footer-col">
+      <h4>Liens Rapides</h4>
+      <ul class="footer-links">
+        <li><a href="#accueil" data-section="accueil"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+        <li><a href="#voitures" data-section="voitures"><i class="fas fa-chevron-right"></i> Voitures</a></li>
+        <li><a href="#services" data-section="services"><i class="fas fa-chevron-right"></i> Services</a></li>
+        <li><a href="#apropos" data-section="apropos"><i class="fas fa-chevron-right"></i> À propos</a></li>
+        <li><a href="#contact" data-section="contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-col">
+      <h4>Nos Services</h4>
+      <ul class="footer-links">
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Achat de véhicules</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Financement</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Reprise</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Entretien & Réparation</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Garanties étendues</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="footer-contact">
+        <p><i class="fas fa-map-marker-alt"></i> 123 Avenue Hassan II, Casablanca</p>
+        <p><i class="fas fa-phone"></i> +212 6 00 00 00 00</p>
+        <p><i class="fas fa-envelope"></i> contact@elhajiauto.com</p>
+        <p><i class="fas fa-clock"></i> Lun-Ven: 9h-19h | Sam: 9h-13h</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="copyright">
+    <p>&copy; 2025 ElHaji Auto. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<!-- Modal for car details -->
+<div id="carModal" class="modal" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="modal-close" onclick="closeModal(event)">&times;</span>
+    <div class="modal-header">
+      <h3 id="modalCarName"></h3>
+      <div class="modal-price" id="modalCarPrice"></div>
+    </div>
+    <div class="modal-main">
+      <div class="modal-images">
+        <div class="main-image">
+          <img id="mainImage" src="" alt="Main car image">
+        </div>
+        <div class="thumbnails" id="thumbnails"></div>
+      </div>
+      <div class="modal-info">
+        <div class="car-specs" id="carSpecs"></div>
+        <div class="modal-description" id="carDescription"></div>
+        <div class="modal-actions">
+          <a href="#" class="modal-btn btn-contact"><i class="fas fa-phone"></i> Contacter</a>
+          <a href="#" class="modal-btn btn-testdrive"><i class="fas fa-calendar-check"></i> Essai gratuit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="back-to-top" id="backToTop">
+  <i class="fas fa-arrow-up"></i>
+</div>
+
+<script>
+  // Data cars with multiple images + info (12 cars for pagination)
+  const cars = [
+    {
+      id: 1,
+      name: "Volkswagen Golf 7 GTI",
+      year: 2018,
+      mileage: "75 000 km",
+      price: "165 000 DH",
+      fuel: "Essence",
+      transmission: "Automatique",
+      power: "220 ch",
+      color: "Gris métallisé",
+      images: [
+        "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1511914265874-8a4976ecb345?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1551830820-330a71b99659?auto=format&fit=crop&w=800&q=70"
+      ],
+      description: "La Volkswagen Golf 7 GTI est une voiture compacte sportive offrant un équilibre parfait entre performances et confort quotidien. Avec son moteur 2.0L TSI de 220 chevaux, elle assure une conduite dynamique tout en restant économique. L'intérieur premium propose des sièges sport, un système d'infotainment dernier cri et une finition irréprochable. Idéale pour les amateurs de conduite sportive qui ne veulent pas sacrifier le confort et la praticité."
+    },
+    {
+      id: 2,
+      name: "BMW Série 3 320d",
+      year: 2020,
+      mileage: "45 000 km",
+      price: "285 000 DH",
+      fuel: "Diesel",
+      transmission: "Automatique",
+      power: "190 ch",
+      color: "Noir",
+      images: [
+        "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1519643381401-22c77e60520e?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=70"
+      ],
+      description: "La BMW Série 3 320d incarne l'excellence allemande avec son design élégant et ses performances remarquables. Dotée d'un moteur diesel 2.0L de 190 chevaux, elle allie puissance et économie de carburant. L'intérieur luxueux propose des matériaux de haute qualité, une connectivité avancée et un confort exceptionnel. Parfaite pour les conducteurs exigeants recherchant une berline premium, dynamique et confortable pour tous les trajets."
+    },
+    {
+      id: 3,
+      name: "Dacia Duster TCe 130",
+      year: 2019,
+      mileage: "60 000 km",
+      price: "135 000 DH",
+      fuel: "Essence",
+      transmission: "Manuelle",
+      power: "130 ch",
+      color: "Blanc",
+      images: [
+        "https://images.unsplash.com/photo-1597006521907-885898bd32bc?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1508050919630-b135583b29b4?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1504609813445-4303414b146e?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1633100570899-9e3e1c0e1d2f?auto=format&fit=crop&w=800&q=70"
+      ],
+      description: "Le Dacia Duster TCe 130 est un SUV robuste et polyvalent qui offre un excellent rapport qualité-prix. Avec son moteur essence 1.3L de 130 chevaux, il assure des performances suffisantes pour la ville comme pour les chemins. Son grand volume de chargement et sa garde au terrain élevée en font le compagnon idéal pour les familles et les aventuriers. Équipé des dernières technologies de sécurité et de confort, il représente une valeur sûre dans le segment des SUV compacts."
+    },
+    {
+      id: 4,
+      name: "Mercedes Classe C 200",
+      year: 2021,
+      mileage: "32 000 km",
+      price: "320 000 DH",
+      fuel: "Essence",
+      transmission: "Automatique",
+      power: "204 ch",
+      color: "Bleu nuit",
+      images: [
+        "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1626668893658-1952059c09b2?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1626668893480-1d4e2d5f5d5a?auto=format&fit=crop&w=800&q=70"
+      ],
+      description: "La Mercedes Classe C 200 est une berline premium qui allie élégance, technologie et performances. Son moteur essence 1.5L de 204 chevaux avec assistance hybride légère offre une conduite à la fois puissante et économique. L'habitacle est un chef-d'œuvre de design avec écrans numériques, commandes tactiles et matériaux nobles. Les systèmes d'assistance à la conduite et de sécurité les plus récents garantissent une expérience de conduite sereine et sécurisée."
+    },
+    {
+      id: 5,
+      name: "Audi Q5 Sportback",
+      year: 2020,
+      mileage: "38 000 km",
+      price: "420 000 DH",
+      fuel: "Diesel",
+      transmission: "Automatique",
+      power: "245 ch",
+      color: "Rouge",
+      images: [
+        "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=70"
+      ],
+      description: "L'Audi Q5 Sportback combine l'élégance d'un coupé avec la praticité d'un SUV. Son design dynamique et son moteur TDI de 245 chevaux en font un véhicule aussi performant que luxueux. L'intérieur spacieux offre un confort exceptionnel et une technologie de pointe."
+    },
+    {
+      id: 6,
+      name: "Peugeot 308 GT",
+      year: 2019,
+      mileage: "55 000 km",
+      price: "145 000 DH",
+      fuel: "Essence",
+      transmission: "Automatique",
+      power: "180 ch",
+      color: "Bleu",
+      images: [
+        "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=800&q=70"
+      ],
+      description: "La Peugeot 308 GT est une compacte française au design élégant et aux performances équilibrées. Son habitacle moderne et ergonomique, associé à un moteur essence turbo de 180 chevaux, en fait une voiture agréable à conduire au quotidien."
+    },
+    {
+      id: 7,
+      name: "Renault Clio V",
+      year: 2022,
+      mileage: "12 000 km",
+      price: "125 000 DH",
+      fuel: "Essence",
+      transmission: "Manuelle",
+      power: "100 ch",
+      color: "Jaune",
+      images: [
+        "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=800&q=70"
+      ],
+      description: "La Renault Clio V est la citadine idéale pour la ville avec son design moderne, son agilité et sa faible consommation. Son intérieur spacieux et bien fini offre un confort surprenant pour cette catégorie de véhicule."
+    },
+    {
+      id: 8,
+      name: "Toyota RAV4 Hybrid",
+      year: 2021,
+      mileage: "30 000 km",
+      price: "290 000 DH",
+      fuel: "Hybride",
+      transmission: "Automatique",
+      power: "218 ch",
+      color: "Gris",
+      images: [
+        "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=800&q=70"
+      ],
+      description: "Le Toyota RAV4 Hybrid est un SUV familial qui allie efficacité énergétique et fiabilité légendaire. Son système hybride offre une conduite souple et économique, idéale pour les trajets urbains comme les longs voyages."
+    },
+    {
+      id: 9,
+      name: "Hyundai Tucson",
+      year: 2020,
+      mileage: "40 000 km",
+      price: "210 000 DH",
+      fuel: "Essence",
+      transmission: "Automatique",
+      power: "150 ch",
+      color: "Vert",
+      images: [
+        "https://images.unsplash.com/photo-1626668893658-1952059c09b2?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1626668893480-1d4e2d5f5d5a?auto=format&fit=crop&w=800&q=70"
+      ],
+      description: "Le Hyundai Tucson est un SUV compact au design audacieux et à la technologie avancée. Son intérieur spacieux et bien équipé, associé à une conduite confortable, en fait un excellent choix familial."
+    },
+    {
+      id: 10,
+      name: "Ford Mustang GT",
+      year: 2018,
+      mileage: "35 000 km",
+      price: "380 000 DH",
+      fuel: "Essence",
+      transmission: "Automatique",
+      power: "450 ch",
+      color: "Rouge",
+      images: [
+        "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1580274437635-89b9f8d0131a?auto=format&fit=crop&w=800&q=70"
+      ],
+      description: "La Ford Mustang GT est l'icône américaine par excellence. Avec son moteur V8 de 450 chevaux, elle offre des performances impressionnantes et un son inoubliable. Un rêve pour les passionnés de voitures sportives."
+    },
+    {
+      id: 11,
+      name: "Kia Sportage",
+      year: 2019,
+      mileage: "52 000 km",
+      price: "185 000 DH",
+      fuel: "Diesel",
+      transmission: "Automatique",
+      power: "185 ch",
+      color: "Blanc",
+      images: [
+        "https://images.unsplash.com/photo-1626668893658-1952059c09b2?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1626668893480-1d4e2d5f5d5a?auto=format&fit=crop&w=800&q=70"
+      ],
+      description: "Le Kia Sportage est un SUV compact qui séduit par son design moderne et son rapport qualité-prix. Doté d'un moteur diesel performant et d'un intérieur spacieux, il est idéal pour les familles."
+    },
+    {
+      id: 12,
+      name: "Land Rover Discovery Sport",
+      year: 2020,
+      mileage: "48 000 km",
+      price: "360 000 DH",
+      fuel: "Diesel",
+      transmission: "Automatique",
+      power: "240 ch",
+      color: "Noir",
+      images: [
+        "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=800&q=70",
+        "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=70"
+      ],
+      description: "Le Land Rover Discovery Sport allie luxe et capacités tout-terrain. Son intérieur premium, ses technologies avancées et ses performances tout-terrain en font un SUV polyvalent et prestigieux."
+    }
+  ];
+
+  // Configuration de la pagination
+  const carsPerPage = 9;
+  let currentPage = 1;
+  
+  // Fonction pour afficher la liste des voitures avec pagination
+  function renderCars(page = 1) {
+    currentPage = page;
+    const carList = document.getElementById("carList");
+    const pagination = document.getElementById("pagination");
+    
+    // Calculer les voitures à afficher
+    const startIndex = (page - 1) * carsPerPage;
+    const endIndex = startIndex + carsPerPage;
+    const paginatedCars = cars.slice(startIndex, endIndex);
+    
+    // Afficher les voitures
+    carList.innerHTML = "";
+    paginatedCars.forEach(car => {
+      const carCard = document.createElement("div");
+      carCard.className = "car";
+      carCard.tabIndex = 0;
+      carCard.setAttribute("role", "button");
+      carCard.setAttribute("aria-label", `Voir les détails de ${car.name}`);
+      carCard.addEventListener("click", () => openModal(car.id));
+      carCard.addEventListener("keydown", e => {
+        if(e.key === "Enter" || e.key === " ") openModal(car.id);
+      });
+
+      carCard.innerHTML = `
+        <div class="car-image">
+          <img src="${car.images[0]}" alt="${car.name}">
+          <div class="car-badge">${page === 1 ? 'Nouveau' : 'Occasion'}</div>
+        </div>
+        <div class="car-content">
+          <div class="car-header">
+            <h3>${car.name}</h3>
+            <div class="car-price">${car.price}</div>
+          </div>
+          <div class="car-details">
+            <div class="car-detail">
+              <i class="fas fa-calendar"></i>
+              <span>${car.year}</span>
+            </div>
+            <div class="car-detail">
+              <i class="fas fa-tachometer-alt"></i>
+              <span>${car.mileage}</span>
+            </div>
+            <div class="car-detail">
+              <i class="fas fa-gas-pump"></i>
+              <span>${car.fuel}</span>
+            </div>
+            <div class="car-detail">
+              <i class="fas fa-cog"></i>
+              <span>${car.transmission}</span>
+            </div>
+          </div>
+          <a href="#" class="car-cta" onclick="event.stopPropagation(); openModal(${car.id})">
+            <i class="fas fa-info-circle"></i> Voir détails
+          </a>
+        </div>
+      `;
+      carList.appendChild(carCard);
+    });
+    
+    // Afficher la pagination
+    renderPagination();
+  }
+  
+  // Fonction pour afficher la pagination
+  function renderPagination() {
+    const pagination = document.getElementById("pagination");
+    const totalPages = Math.ceil(cars.length / carsPerPage);
+    
+    pagination.innerHTML = '';
+    
+    // Bouton Précédent
+    const prevBtn = document.createElement('button');
+    prevBtn.className = `page-btn prev ${currentPage === 1 ? 'disabled' : ''}`;
+    prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i> Précédent';
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) renderCars(currentPage - 1);
+    });
+    pagination.appendChild(prevBtn);
+    
+    // Numéros de page
+    for (let i = 1; i <= totalPages; i++) {
+      const pageBtn = document.createElement('button');
+      pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+      pageBtn.textContent = i;
+      pageBtn.addEventListener('click', () => renderCars(i));
+      pagination.appendChild(pageBtn);
+    }
+    
+    // Bouton Suivant
+    const nextBtn = document.createElement('button');
+    nextBtn.className = `page-btn next ${currentPage === totalPages ? 'disabled' : ''}`;
+    nextBtn.innerHTML = 'Suivant <i class="fas fa-chevron-right"></i>';
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < totalPages) renderCars(currentPage + 1);
+    });
+    pagination.appendChild(nextBtn);
+  }
+
+  // Modal functions
+  const modal = document.getElementById("carModal");
+  const modalCarName = document.getElementById("modalCarName");
+  const modalCarPrice = document.getElementById("modalCarPrice");
+  const mainImage = document.getElementById("mainImage");
+  const thumbnailsContainer = document.getElementById("thumbnails");
+  const carSpecs = document.getElementById("carSpecs");
+  const carDescription = document.getElementById("carDescription");
+
+  function openModal(carId) {
+    const car = cars.find(c => c.id === carId);
+    if (!car) return;
+
+    // Set car info
+    modalCarName.textContent = car.name;
+    modalCarPrice.textContent = car.price;
+    mainImage.src = car.images[0];
+    carDescription.textContent = car.description;
+
+    // Specs
+    carSpecs.innerHTML = `
+      <div class="spec-item">
+        <i class="fas fa-calendar"></i>
+        <div class="spec-text">
+          <span class="spec-label">Année</span>
+          <span class="spec-value">${car.year}</span>
+        </div>
+      </div>
+      <div class="spec-item">
+        <i class="fas fa-tachometer-alt"></i>
+        <div class="spec-text">
+          <span class="spec-label">Kilométrage</span>
+          <span class="spec-value">${car.mileage}</span>
+        </div>
+      </div>
+      <div class="spec-item">
+        <i class="fas fa-gas-pump"></i>
+        <div class="spec-text">
+          <span class="spec-label">Carburant</span>
+          <span class="spec-value">${car.fuel}</span>
+        </div>
+      </div>
+      <div class="spec-item">
+        <i class="fas fa-cog"></i>
+        <div class="spec-text">
+          <span class="spec-label">Transmission</span>
+          <span class="spec-value">${car.transmission}</span>
+        </div>
+      </div>
+      <div class="spec-item">
+        <i class="fas fa-horse-head"></i>
+        <div class="spec-text">
+          <span class="spec-label">Puissance</span>
+          <span class="spec-value">${car.power}</span>
+        </div>
+      </div>
+      <div class="spec-item">
+        <i class="fas fa-palette"></i>
+        <div class="spec-text">
+          <span class="spec-label">Couleur</span>
+          <span class="spec-value">${car.color}</span>
+        </div>
+      </div>
+    `;
+
+    // Thumbnails
+    thumbnailsContainer.innerHTML = "";
+    car.images.forEach((src, index) => {
+      const thumbnail = document.createElement("div");
+      thumbnail.className = "thumbnail";
+      if (index === 0) thumbnail.classList.add("active");
+      thumbnail.innerHTML = `<img src="${src}" alt="Thumbnail ${index + 1}">`;
+      thumbnail.addEventListener("click", () => {
+        mainImage.src = src;
+        document.querySelectorAll(".thumbnail").forEach(t => t.classList.remove("active"));
+        thumbnail.classList.add("active");
+      });
+      thumbnailsContainer.appendChild(thumbnail);
+    });
+
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal(e) {
+    if (e.target === modal || e.target.classList.contains("modal-close")) {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  }
+
+  // Navigation entre sections
+  function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('.section').forEach(section => {
+      section.classList.remove('active');
+    });
+    
+    // Show the selected section
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.classList.add('active');
+      
+      // Scroll to section
+      setTimeout(() => {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
+    
+    // Update active nav link
+    document.querySelectorAll("nav a, .footer-links a").forEach(link => {
+      link.classList.remove("active");
+      if (link.getAttribute("data-section") === sectionId) {
+        link.classList.add("active");
+      }
+    });
+  }
+
+  // Back to top button
+  const backToTopBtn = document.getElementById("backToTop");
+  
+  window.addEventListener("scroll", () => {
+    if (window.pageYOffset > 300) {
+      backToTopBtn.classList.add("show");
+    } else {
+      backToTopBtn.classList.remove("show");
+    }
+  });
+  
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // Contact form submission
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert("Merci pour votre message ! Nous vous contacterons très rapidement.");
+    this.reset();
+  });
+
+  // Navigation event listeners
+  document.querySelectorAll("nav a, .footer-links a, .hero-buttons button").forEach(element => {
+    element.addEventListener("click", function(e) {
+      e.preventDefault();
+      const sectionId = this.getAttribute("data-section");
+      if (sectionId) {
+        showSection(sectionId);
+      }
+    });
+  });
+
+  // Initialisation
+  window.onload = () => {
+    renderCars();
+    showSection("accueil");
+    
+    // Show hero section on load
+    document.querySelector('.hero').style.display = 'flex';
+  };
+</script>
+
+</body>
+</html>
