@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ElHaji Auto - Vente de Voitures Premium</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
   <style>
     :root {
       --primary: #1a202c;
@@ -1146,6 +1147,64 @@
         flex: 1 0 calc(100% - 30px);
       }
     }
+
+    /* New styles for sell form */
+    .form-notification {
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 8px;
+      display: none;
+      text-align: center;
+    }
+
+    .success-message {
+      background: rgba(72, 187, 120, 0.15);
+      border: 1px solid var(--success);
+      color: var(--success);
+    }
+
+    .error-message {
+      background: rgba(229, 62, 62, 0.15);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .loading {
+      position: relative;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .loading::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.7);
+      z-index: 10;
+      border-radius: 8px;
+    }
+
+    .loading-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 11;
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(49, 130, 206, 0.2);
+      border-top: 4px solid var(--secondary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -1162,7 +1221,7 @@
       </div>
     </div>
     <div class="contact-header">
-      <p><i class="fas fa-phone"></i> +212 6 00 00 00 00</p>
+      <p><i class="fas fa-phone"></i> +212 6 63 08 02 62</p>
     </div>
   </div>
 </header>
@@ -1294,6 +1353,13 @@
     <div class="sell-form">
       <h3>Prendre rendez-vous pour estimation</h3>
       <form id="sellCarForm">
+        <div class="form-notification success-message" id="successMessage">
+          <i class="fas fa-check-circle"></i> Votre demande a été envoyée avec succès ! Nous vous contacterons rapidement.
+        </div>
+        <div class="form-notification error-message" id="errorMessage">
+          <i class="fas fa-exclamation-circle"></i> Une erreur s'est produite. Veuillez réessayer.
+        </div>
+        
         <div class="form-row">
           <div class="form-group">
             <label for="sellName">Nom complet *</label>
@@ -1378,7 +1444,7 @@
           </div>
         </div>
         
-        <button type="submit" class="submit-btn">
+        <button type="submit" class="submit-btn" id="submitBtn">
           <i class="fas fa-calendar-check"></i> Prendre rendez-vous
         </button>
       </form>
@@ -1412,7 +1478,7 @@
         </div>
         <div class="contact-text">
           <h4>Téléphone</h4>
-          <p>+212 6 00 00 00 00</p>
+          <p>+212 6 63 08 02 62</p>
         </div>
       </div>
       
@@ -1522,8 +1588,8 @@
     <div class="footer-col">
       <h4>Contact</h4>
       <div class="footer-contact">
-        <p><i class="fas fa-map-marker-alt"></i> 123 Avenue Hassan II, Casablanca</p>
-        <p><i class="fas fa-phone"></i> +212 6 00 00 00 00</p>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Avenue Hassan II, Tanger</p>
+        <p><i class="fas fa-phone"></i> +212 6 63 08 02 62</p>
         <p><i class="fas fa-envelope"></i> contact@elhajiauto.com</p>
         <p><i class="fas fa-clock"></i> Lun-Ven: 9h-19h | Sam: 9h-13h</p>
       </div>
@@ -1571,205 +1637,78 @@
   const cars = [
     {
       id: 1,
-      name: "Volkswagen Golf 7 GTI",
-      year: 2018,
-      mileage: "75 000 km",
-      price: "165 000 DH",
-      fuel: "Essence",
-      transmission: "Automatique",
-      power: "220 ch",
+      name: "Volkswagen Golf 5 GT",
+      year: 2006,
+      mileage: "221 000 km",
+      price: "100 000 DH",
+      fuel: "Diesel",
+      transmission: "Manuel",
+      power: "140 ch",
       color: "Gris métallisé",
       images: [
-        "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1511914265874-8a4976ecb345?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1551830820-330a71b99659?auto=format&fit=crop&w=800&q=70"
+        "https://i.imgur.com/voQaWQL.png",
+        "https://i.imgur.com/damId9b.png",
+        "https://i.imgur.com/auIaN7Z.png",
+        "https://i.imgur.com/iCwuNZN.png"
       ],
       description: "La Volkswagen Golf 7 GTI est une voiture compacte sportive offrant un équilibre parfait entre performances et confort quotidien. Avec son moteur 2.0L TSI de 220 chevaux, elle assure une conduite dynamique tout en restant économique. L'intérieur premium propose des sièges sport, un système d'infotainment dernier cri et une finition irréprochable. Idéale pour les amateurs de conduite sportive qui ne veulent pas sacrifier le confort et la praticité."
     },
     {
       id: 2,
-      name: "BMW Série 3 320d",
-      year: 2020,
-      mileage: "45 000 km",
-      price: "285 000 DH",
+      name: "Seat LEon 2009",
+      year: 2009,
+      mileage: "320 000 km",
+      price: "75 000 DH",
       fuel: "Diesel",
-      transmission: "Automatique",
-      power: "190 ch",
-      color: "Noir",
+      transmission: "Manuel",
+      power: "140 ch",
+      color: "Gris métallisé",
       images: [
-        "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1519643381401-22c77e60520e?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=70"
+        "https://i.imgur.com/qCKObXz.png",
+        "https://i.imgur.com/LFiCULN.png",
+        "https://i.imgur.com/18cdGe1.png",
+        "https://i.imgur.com/CpRBCli.png",
+		"https://i.imgur.com/H5R9PoN.png",
+		"https://i.imgur.com/hdyr8m0.png"
       ],
-      description: "La BMW Série 3 320d incarne l'excellence allemande avec son design élégant et ses performances remarquables. Dotée d'un moteur diesel 2.0L de 190 chevaux, elle allie puissance et économie de carburant. L'intérieur luxueux propose des matériaux de haute qualité, une connectivité avancée et un confort exceptionnel. Parfaite pour les conducteurs exigeants recherchant une berline premium, dynamique et confortable pour tous les trajets."
+      description: "La Volkswagen Golf 7 GTI est une voiture compacte sportive offrant un équilibre parfait entre performances et confort quotidien. Avec son moteur 2.0L TSI de 220 chevaux, elle assure une conduite dynamique tout en restant économique. L'intérieur premium propose des sièges sport, un système d'infotainment dernier cri et une finition irréprochable. Idéale pour les amateurs de conduite sportive qui ne veulent pas sacrifier le confort et la praticité."
     },
     {
       id: 3,
-      name: "Dacia Duster TCe 130",
-      year: 2019,
-      mileage: "60 000 km",
-      price: "135 000 DH",
+      name: "Mazda 2 2009",
+      year: 2009,
+      mileage: "170 000 km",
+      price: "50 000 DH",
       fuel: "Essence",
-      transmission: "Manuelle",
-      power: "130 ch",
-      color: "Blanc",
+      transmission: "Manuel",
+      power: "100 ch",
+      color: "Blue",
       images: [
-        "https://images.unsplash.com/photo-1597006521907-885898bd32bc?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1508050919630-b135583b29b4?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1504609813445-4303414b146e?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1633100570899-9e3e1c0e1d2f?auto=format&fit=crop&w=800&q=70"
+        "https://i.imgur.com/mAeUgT5.png",
+        "https://i.imgur.com/YQlN0GI.png",
+        "https://i.imgur.com/PRYJY2i.png",
+        "https://i.imgur.com/4b43W9d.png"
       ],
-      description: "Le Dacia Duster TCe 130 est un SUV robuste et polyvalent qui offre un excellent rapport qualité-prix. Avec son moteur essence 1.3L de 130 chevaux, il assure des performances suffisantes pour la ville comme pour les chemins. Son grand volume de chargement et sa garde au terrain élevée en font le compagnon idéal pour les familles et les aventuriers. Équipé des dernières technologies de sécurité et de confort, il représente une valeur sûre dans le segment des SUV compacts."
+      description: "La Volkswagen Golf 7 GTI est une voiture compacte sportive offrant un équilibre parfait entre performances et confort quotidien. Avec son moteur 2.0L TSI de 220 chevaux, elle assure une conduite dynamique tout en restant économique. L'intérieur premium propose des sièges sport, un système d'infotainment dernier cri et une finition irréprochable. Idéale pour les amateurs de conduite sportive qui ne veulent pas sacrifier le confort et la praticité."
     },
     {
       id: 4,
-      name: "Mercedes Classe C 200",
-      year: 2021,
-      mileage: "32 000 km",
-      price: "320 000 DH",
-      fuel: "Essence",
-      transmission: "Automatique",
-      power: "204 ch",
-      color: "Bleu nuit",
-      images: [
-        "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1626668893658-1952059c09b2?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1626668893480-1d4e2d5f5d5a?auto=format&fit=crop&w=800&q=70"
-      ],
-      description: "La Mercedes Classe C 200 est une berline premium qui allie élégance, technologie et performances. Son moteur essence 1.5L de 204 chevaux avec assistance hybride légère offre une conduite à la fois puissante et économique. L'habitacle est un chef-d'œuvre de design avec écrans numériques, commandes tactiles et matériaux nobles. Les systèmes d'assistance à la conduite et de sécurité les plus récents garantissent une expérience de conduite sereine et sécurisée."
-    },
-    {
-      id: 5,
-      name: "Audi Q5 Sportback",
-      year: 2020,
-      mileage: "38 000 km",
-      price: "420 000 DH",
+      name: "Nissan Pathfunder 2008",
+      year: 2008,
+      mileage: "330 000 km",
+      price: "80 000 DH",
       fuel: "Diesel",
-      transmission: "Automatique",
-      power: "245 ch",
-      color: "Rouge",
+      transmission: "Manuel",
+      power: "140 ch",
+      color: "Gris métallisé",
       images: [
-        "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=70"
+        "https://i.imgur.com/jgnaTks.png",
+        "https://i.imgur.com/q97Bq1y.png",
+        "https://i.imgur.com/7RgIHoM.png",
+        "https://i.imgur.com/A6wCpUq.png"
       ],
-      description: "L'Audi Q5 Sportback combine l'élégance d'un coupé avec la praticité d'un SUV. Son design dynamique et son moteur TDI de 245 chevaux en font un véhicule aussi performant que luxueux. L'intérieur spacieux offre un confort exceptionnel et une technologie de pointe."
-    },
-    {
-      id: 6,
-      name: "Peugeot 308 GT",
-      year: 2019,
-      mileage: "55 000 km",
-      price: "145 000 DH",
-      fuel: "Essence",
-      transmission: "Automatique",
-      power: "180 ch",
-      color: "Bleu",
-      images: [
-        "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=800&q=70"
-      ],
-      description: "La Peugeot 308 GT est une compacte française au design élégant et aux performances équilibrées. Son habitacle moderne et ergonomique, associé à un moteur essence turbo de 180 chevaux, en fait une voiture agréable à conduire au quotidien."
-    },
-    {
-      id: 7,
-      name: "Renault Clio V",
-      year: 2022,
-      mileage: "12 000 km",
-      price: "125 000 DH",
-      fuel: "Essence",
-      transmission: "Manuelle",
-      power: "100 ch",
-      color: "Jaune",
-      images: [
-        "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=800&q=70"
-      ],
-      description: "La Renault Clio V est la citadine idéale pour la ville avec son design moderne, son agilité et sa faible consommation. Son intérieur spacieux et bien fini offre un confort surprenant pour cette catégorie de véhicule."
-    },
-    {
-      id: 8,
-      name: "Toyota RAV4 Hybrid",
-      year: 2021,
-      mileage: "30 000 km",
-      price: "290 000 DH",
-      fuel: "Hybride",
-      transmission: "Automatique",
-      power: "218 ch",
-      color: "Gris",
-      images: [
-        "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=800&q=70"
-      ],
-      description: "Le Toyota RAV4 Hybrid est un SUV familial qui allie efficacité énergétique et fiabilité légendaire. Son système hybride offre une conduite souple et économique, idéale pour les trajets urbains comme les longs voyages."
-    },
-    {
-      id: 9,
-      name: "Hyundai Tucson",
-      year: 2020,
-      mileage: "40 000 km",
-      price: "210 000 DH",
-      fuel: "Essence",
-      transmission: "Automatique",
-      power: "150 ch",
-      color: "Vert",
-      images: [
-        "https://images.unsplash.com/photo-1626668893658-1952059c09b2?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1626668893480-1d4e2d5f5d5a?auto=format&fit=crop&w=800&q=70"
-      ],
-      description: "Le Hyundai Tucson est un SUV compact au design audacieux et à la technologie avancée. Son intérieur spacieux et bien équipé, associé à une conduite confortable, en fait un excellent choix familial."
-    },
-    {
-      id: 10,
-      name: "Ford Mustang GT",
-      year: 2018,
-      mileage: "35 000 km",
-      price: "380 000 DH",
-      fuel: "Essence",
-      transmission: "Automatique",
-      power: "450 ch",
-      color: "Rouge",
-      images: [
-        "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1580274437635-89b9f8d0131a?auto=format&fit=crop&w=800&q=70"
-      ],
-      description: "La Ford Mustang GT est l'icône américaine par excellence. Avec son moteur V8 de 450 chevaux, elle offre des performances impressionnantes et un son inoubliable. Un rêve pour les passionnés de voitures sportives."
-    },
-    {
-      id: 11,
-      name: "Kia Sportage",
-      year: 2019,
-      mileage: "52 000 km",
-      price: "185 000 DH",
-      fuel: "Diesel",
-      transmission: "Automatique",
-      power: "185 ch",
-      color: "Blanc",
-      images: [
-        "https://images.unsplash.com/photo-1626668893658-1952059c09b2?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1626668893480-1d4e2d5f5d5a?auto=format&fit=crop&w=800&q=70"
-      ],
-      description: "Le Kia Sportage est un SUV compact qui séduit par son design moderne et son rapport qualité-prix. Doté d'un moteur diesel performant et d'un intérieur spacieux, il est idéal pour les familles."
-    },
-    {
-      id: 12,
-      name: "Land Rover Discovery Sport",
-      year: 2020,
-      mileage: "48 000 km",
-      price: "360 000 DH",
-      fuel: "Diesel",
-      transmission: "Automatique",
-      power: "240 ch",
-      color: "Noir",
-      images: [
-        "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=800&q=70",
-        "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=70"
-      ],
-      description: "Le Land Rover Discovery Sport allie luxe et capacités tout-terrain. Son intérieur premium, ses technologies avancées et ses performances tout-terrain en font un SUV polyvalent et prestigieux."
-    }
+      description: "La Volkswagen Golf 7 GTI est une voiture compacte sportive offrant un équilibre parfait entre performances et confort quotidien. Avec son moteur 2.0L TSI de 220 chevaux, elle assure une conduite dynamique tout en restant économique. L'intérieur premium propose des sièges sport, un système d'infotainment dernier cri et une finition irréprochable. Idéale pour les amateurs de conduite sportive qui ne veulent pas sacrifier le confort et la praticité."
+    },	
   ];
 
   // Configuration de la pagination
@@ -2016,7 +1955,7 @@
   });
 
   // Nouveau formulaire pour vendre sa voiture
-  document.getElementById("sellCarForm").addEventListener("submit", function(e) {
+  document.getElementById("sellCarForm").addEventListener("submit", async function(e) {
     e.preventDefault();
     
     // Récupérer les valeurs du formulaire
@@ -2047,11 +1986,63 @@
       condition
     };
     
-    // Afficher un message de confirmation
-    alert(`Merci ${name} !\nVotre demande de rendez-vous pour vendre votre ${brand} ${model} a été enregistrée.\nNous vous contacterons au ${phone} pour confirmer le rendez-vous.`);
+    // Afficher un indicateur de chargement
+    const submitBtn = document.getElementById("submitBtn");
+    const form = document.getElementById("sellCarForm");
     
-    // Réinitialiser le formulaire
-    this.reset();
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+    submitBtn.disabled = true;
+    form.classList.add('loading');
+    
+    try {
+      // Envoyer l'email via SMTP.js
+      Email.send({
+        SecureToken: " 3a416c4b-cceb-4bf0-84c8-0bd4765a4c46", // Remplacez par votre token SMTP
+        To: "contact@elhajiauto.com",
+        From: document.getElementById("sellEmail").value,
+        Subject: `Nouvelle demande de vente: ${brand} ${model}`,
+        Body: `
+          <h2>Nouvelle demande de vente de voiture</h2>
+          <p><strong>Nom:</strong> ${name}</p>
+          <p><strong>Téléphone:</strong> ${phone}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Date souhaitée:</strong> ${date}</p>
+          <hr>
+          <h3>Détails du véhicule</h3>
+          <p><strong>Marque:</strong> ${brand}</p>
+          <p><strong>Modèle:</strong> ${model}</p>
+          <p><strong>Année:</strong> ${year}</p>
+          <p><strong>Kilométrage:</strong> ${mileage} km</p>
+          <p><strong>Carburant:</strong> ${fuel}</p>
+          <p><strong>Transmission:</strong> ${transmission}</p>
+          <p><strong>État du véhicule:</strong></p>
+          <p>${condition}</p>
+        `
+      }).then(
+        message => {
+          if (message === "OK") {
+            // Afficher le message de succès
+            document.getElementById("successMessage").style.display = "block";
+            document.getElementById("errorMessage").style.display = "none";
+            
+            // Réinitialiser le formulaire
+            this.reset();
+          } else {
+            throw new Error("Erreur lors de l'envoi de l'email");
+          }
+        }
+      );
+    } catch (error) {
+      console.error("Erreur:", error);
+      // Afficher le message d'erreur
+      document.getElementById("errorMessage").style.display = "block";
+      document.getElementById("successMessage").style.display = "none";
+    } finally {
+      // Réinitialiser le bouton
+      submitBtn.innerHTML = '<i class="fas fa-calendar-check"></i> Prendre rendez-vous';
+      submitBtn.disabled = false;
+      form.classList.remove('loading');
+    }
   });
 
   // Navigation event listeners
