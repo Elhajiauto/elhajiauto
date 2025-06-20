@@ -1050,106 +1050,6 @@
       transform: translateY(-5px);
     }
     
-    /* Responsive Design */
-    @media (max-width: 992px) {
-      .about-content,
-      .contact-container,
-      .modal-main {
-        grid-template-columns: 1fr;
-      }
-      
-      .about-image {
-        max-width: 600px;
-        margin: 0 auto;
-      }
-      
-      .hero-content h1 {
-        font-size: 3rem;
-      }
-      
-      .section {
-        padding: 60px 20px;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .header-container {
-        flex-direction: column;
-        gap: 15px;
-      }
-      
-      nav {
-        flex-wrap: wrap;
-      }
-      
-      nav a {
-        padding: 12px 15px;
-        font-size: 0.9rem;
-      }
-      
-      .hero-content h1 {
-        font-size: 2.5rem;
-      }
-      
-      .hero-content p {
-        font-size: 1.1rem;
-      }
-      
-      .hero-buttons {
-        flex-direction: column;
-        gap: 15px;
-      }
-      
-      .btn {
-        width: 100%;
-        justify-content: center;
-      }
-      
-      .section-header h2 {
-        font-size: 2rem;
-      }
-      
-      .car-specs {
-        grid-template-columns: 1fr;
-      }
-      
-      .modal-actions {
-        flex-direction: column;
-      }
-    }
-    
-    @media (max-width: 576px) {
-      .hero {
-        height: 75vh;
-        min-height: 500px;
-      }
-      
-      .hero-content h1 {
-        font-size: 2rem;
-      }
-      
-      .stat-item .number {
-        font-size: 2rem;
-      }
-      
-      .contact-info,
-      .contact-form {
-        padding: 30px 20px;
-      }
-      
-      .modal-content {
-        max-width: 95%;
-      }
-      
-      .sell-form-container {
-        padding: 20px;
-      }
-      
-      .form-group {
-        flex: 1 0 calc(100% - 30px);
-      }
-    }
-
     /* New styles for sell form */
     .form-notification {
       padding: 15px;
@@ -1206,6 +1106,229 @@
     @keyframes spin {
       0% { transform: translate(-50%, -50%) rotate(0deg); }
       100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    
+    /* ========== CORRECTIONS MOBILE ========== */
+    
+    /* Améliorations pour le modal sur mobile */
+    @media (max-width: 992px) {
+      .about-content,
+      .contact-container,
+      .modal-main {
+        grid-template-columns: 1fr;
+      }
+      
+      .about-image {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+      
+      .section {
+        padding: 60px 20px;
+      }
+      
+      /* Ajustements spécifiques pour le modal */
+      .modal-main {
+        padding: 0 20px 20px;
+        gap: 20px;
+      }
+      
+      .main-image {
+        height: 300px;
+      }
+      
+      .modal-actions {
+        flex-direction: column;
+      }
+      
+      .modal-btn {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      nav {
+        flex-wrap: wrap;
+      }
+      
+      nav a {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .section-header h2 {
+        font-size: 2rem;
+      }
+      
+      .car-specs {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-actions {
+        flex-direction: column;
+      }
+      
+      /* Ajustements supplémentaires pour le modal sur mobile */
+      .modal-header {
+        padding: 20px 20px 10px;
+      }
+      
+      .modal-header h3 {
+        font-size: 1.5rem;
+      }
+      
+      .modal-price {
+        font-size: 1.5rem;
+      }
+      
+      .main-image {
+        height: 250px;
+      }
+      
+      .thumbnail {
+        width: 70px;
+        height: 50px;
+      }
+      
+      .spec-item {
+        padding: 10px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .hero {
+        height: 75vh;
+        min-height: 500px;
+      }
+      
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .stat-item .number {
+        font-size: 2rem;
+      }
+      
+      .contact-info,
+      .contact-form {
+        padding: 30px 20px;
+      }
+      
+      .modal-content {
+        max-width: 95%;
+      }
+      
+      .sell-form-container {
+        padding: 20px;
+      }
+      
+      .form-group {
+        flex: 1 0 calc(100% - 30px);
+      }
+      
+      /* Ajustements finaux pour le modal sur très petits écrans */
+      .modal-main {
+        padding: 0 15px 15px;
+      }
+      
+      .main-image {
+        height: 200px;
+      }
+      
+      .modal-header {
+        padding: 15px 15px 5px;
+      }
+      
+      .modal-header h3 {
+        font-size: 1.3rem;
+      }
+      
+      .modal-price {
+        font-size: 1.3rem;
+      }
+      
+      .car-specs {
+        gap: 10px;
+        margin: 15px 0;
+      }
+      
+      .spec-item i {
+        font-size: 1rem;
+      }
+      
+      .spec-label {
+        font-size: 0.8rem;
+      }
+      
+      .spec-value {
+        font-size: 0.9rem;
+      }
+      
+      .modal-description {
+        font-size: 0.9rem;
+        margin: 15px 0;
+      }
+      
+      .thumbnails {
+        gap: 5px;
+      }
+      
+      .thumbnail {
+        width: 60px;
+        height: 45px;
+      }
+    }
+    
+    /* Ajout d'une animation de fermeture pour le modal */
+    .modal.closing .modal-content {
+      animation: modalFadeOut 0.3s ease forwards;
+    }
+    
+    @keyframes modalFadeOut {
+      from {opacity: 1; transform: translateY(0);}
+      to {opacity: 0; transform: translateY(50px);}
+    }
+    
+    /* Amélioration du contraste pour la navigation mobile */
+    @media (max-width: 768px) {
+      nav {
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      nav a {
+        padding: 12px 10px;
+        font-size: 0.85rem;
+      }
     }
   </style>
 </head>
@@ -1858,6 +1981,7 @@
 
       modal.style.display = "flex";
       document.body.style.overflow = "hidden";
+      modal.classList.remove("closing");
     } catch (error) {
       console.error("Erreur d'ouverture du modal:", error);
     }
@@ -1865,8 +1989,14 @@
 
   function closeModal(e) {
     if (e.target === modal || e.target.classList.contains("modal-close")) {
-      modal.style.display = "none";
-      document.body.style.overflow = "auto";
+      // Ajouter une animation de fermeture
+      modal.classList.add("closing");
+      
+      setTimeout(() => {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+        modal.classList.remove("closing");
+      }, 300);
     }
   }
 
