@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ElHaji Auto - Vente de Voitures Premium</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
   <style>
     :root {
       --primary: #1a202c;
@@ -382,7 +384,7 @@
     
     .car-details {
       display: grid;
-      grid-template-columns: repeat(2, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
       margin-bottom: 20px;
     }
@@ -494,7 +496,7 @@
     
     .about-stats {
       display: grid;
-      grid-template-columns: repeat(3, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       margin-top: 30px;
     }
@@ -839,7 +841,7 @@
     
     .car-specs {
       display: grid;
-      grid-template-columns: repeat(2, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 15px;
       margin: 25px 0;
     }
@@ -1342,7 +1344,6 @@
   </div>
 </section>
 
-<!-- Nouvelle section "Vendre ma voiture" -->
 <section id="vendre" class="section">
   <div class="section-header">
     <h2>Vendre ma voiture</h2>
@@ -1633,150 +1634,108 @@
 </div>
 
 <script>
-  // Data cars with multiple images + info (12 cars for pagination)
-  const cars = [
-    {
-      id: 1,
-      name: "Volkswagen Golf 5 GT",
-      year: 2006,
-      mileage: "221 000 km",
-      price: "100 000 DH",
-      fuel: "Diesel",
-      transmission: "Manuel",
-      power: "140 ch",
-      color: "Gris métallisé",
-      images: [
-        "https://i.imgur.com/voQaWQL.png",
-        "https://i.imgur.com/damId9b.png",
-        "https://i.imgur.com/auIaN7Z.png",
-        "https://i.imgur.com/iCwuNZN.png"
-      ],
-      description: "La Volkswagen Golf 7 GTI est une voiture compacte sportive offrant un équilibre parfait entre performances et confort quotidien. Avec son moteur 2.0L TSI de 220 chevaux, elle assure une conduite dynamique tout en restant économique. L'intérieur premium propose des sièges sport, un système d'infotainment dernier cri et une finition irréprochable. Idéale pour les amateurs de conduite sportive qui ne veulent pas sacrifier le confort et la praticité."
-    },
-    {
-      id: 2,
-      name: "Seat LEon 2009",
-      year: 2009,
-      mileage: "320 000 km",
-      price: "78 000 DH",
-      fuel: "Diesel",
-      transmission: "Manuel",
-      power: "140 ch",
-      color: "Gris métallisé",
-      images: [
-        "https://i.imgur.com/qCKObXz.png",
-        "https://i.imgur.com/LFiCULN.png",
-        "https://i.imgur.com/18cdGe1.png",
-        "https://i.imgur.com/CpRBCli.png",
-		"https://i.imgur.com/H5R9PoN.png",
-		"https://i.imgur.com/hdyr8m0.png"
-      ],
-      description: "La Volkswagen Golf 7 GTI est une voiture compacte sportive offrant un équilibre parfait entre performances et confort quotidien. Avec son moteur 2.0L TSI de 220 chevaux, elle assure une conduite dynamique tout en restant économique. L'intérieur premium propose des sièges sport, un système d'infotainment dernier cri et une finition irréprochable. Idéale pour les amateurs de conduite sportive qui ne veulent pas sacrifier le confort et la praticité."
-    },
-    {
-      id: 3,
-      name: "Mazda 2 2009",
-      year: 2009,
-      mileage: "170 000 km",
-      price: "50 000 DH",
-      fuel: "Essence",
-      transmission: "Manuel",
-      power: "100 ch",
-      color: "Blue",
-      images: [
-        "https://i.imgur.com/mAeUgT5.png",
-        "https://i.imgur.com/YQlN0GI.png",
-        "https://i.imgur.com/PRYJY2i.png",
-        "https://i.imgur.com/4b43W9d.png"
-      ],
-      description: "La Volkswagen Golf 7 GTI est une voiture compacte sportive offrant un équilibre parfait entre performances et confort quotidien. Avec son moteur 2.0L TSI de 220 chevaux, elle assure une conduite dynamique tout en restant économique. L'intérieur premium propose des sièges sport, un système d'infotainment dernier cri et une finition irréprochable. Idéale pour les amateurs de conduite sportive qui ne veulent pas sacrifier le confort et la praticité."
-    },
-    {
-      id: 4,
-      name: "Nissan Pathfunder 2008",
-      year: 2008,
-      mileage: "330 000 km",
-      price: "80 000 DH",
-      fuel: "Diesel",
-      transmission: "Manuel",
-      power: "140 ch",
-      color: "Gris métallisé",
-      images: [
-        "https://i.imgur.com/jgnaTks.png",
-        "https://i.imgur.com/q97Bq1y.png",
-        "https://i.imgur.com/7RgIHoM.png",
-        "https://i.imgur.com/A6wCpUq.png"
-      ],
-      description: "La Volkswagen Golf 7 GTI est une voiture compacte sportive offrant un équilibre parfait entre performances et confort quotidien. Avec son moteur 2.0L TSI de 220 chevaux, elle assure une conduite dynamique tout en restant économique. L'intérieur premium propose des sièges sport, un système d'infotainment dernier cri et une finition irréprochable. Idéale pour les amateurs de conduite sportive qui ne veulent pas sacrifier le confort et la praticité."
-    },	
-  ];
+  // Configuration Firebase (remplacer avec vos propres informations)
+    const firebaseConfig = {
+      apiKey: "AIzaSyC0YUGE6hRG9sck7rXcqjaB3he1nRGgbbU",
+      authDomain: "elhaji-auto.firebaseapp.com",
+      projectId: "elhaji-auto",
+      storageBucket: "elhaji-auto.appspot.com",
+      messagingSenderId: "596529784342",
+      appId: "1:596529784342:web:dfa01b1e33287ce36db737"
+    };
+
+  // Initialisation Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // Références aux collections
+  const carsCollection = db.collection("cars");
+  const sellRequestsCollection = db.collection("sellRequests");
 
   // Configuration de la pagination
   const carsPerPage = 9;
   let currentPage = 1;
+  let cars = [];
   
-  // Fonction pour afficher la liste des voitures avec pagination
-  function renderCars(page = 1) {
-    currentPage = page;
-    const carList = document.getElementById("carList");
-    const pagination = document.getElementById("pagination");
-    
-    // Calculer les voitures à afficher
-    const startIndex = (page - 1) * carsPerPage;
-    const endIndex = startIndex + carsPerPage;
-    const paginatedCars = cars.slice(startIndex, endIndex);
-    
-    // Afficher les voitures
-    carList.innerHTML = "";
-    paginatedCars.forEach(car => {
-      const carCard = document.createElement("div");
-      carCard.className = "car";
-      carCard.tabIndex = 0;
-      carCard.setAttribute("role", "button");
-      carCard.setAttribute("aria-label", `Voir les détails de ${car.name}`);
-      carCard.addEventListener("click", () => openModal(car.id));
-      carCard.addEventListener("keydown", e => {
-        if(e.key === "Enter" || e.key === " ") openModal(car.id);
+  // Charger les voitures depuis Firebase
+  function fetchCars() {
+    return carsCollection.get().then(querySnapshot => {
+      cars = [];
+      querySnapshot.forEach(doc => {
+        cars.push({ id: doc.id, ...doc.data() });
       });
-
-      carCard.innerHTML = `
-        <div class="car-image">
-          <img src="${car.images[0]}" alt="${car.name}">
-          <div class="car-badge">${page === 1 ? 'Nouveau' : 'Occasion'}</div>
-        </div>
-        <div class="car-content">
-          <div class="car-header">
-            <h3>${car.name}</h3>
-            <div class="car-price">${car.price}</div>
-          </div>
-          <div class="car-details">
-            <div class="car-detail">
-              <i class="fas fa-calendar"></i>
-              <span>${car.year}</span>
-            </div>
-            <div class="car-detail">
-              <i class="fas fa-tachometer-alt"></i>
-              <span>${car.mileage}</span>
-            </div>
-            <div class="car-detail">
-              <i class="fas fa-gas-pump"></i>
-              <span>${car.fuel}</span>
-            </div>
-            <div class="car-detail">
-              <i class="fas fa-cog"></i>
-              <span>${car.transmission}</span>
-            </div>
-          </div>
-          <a href="#" class="car-cta" onclick="event.stopPropagation(); openModal(${car.id})">
-            <i class="fas fa-info-circle"></i> Voir détails
-          </a>
-        </div>
-      `;
-      carList.appendChild(carCard);
+      return cars;
     });
-    
-    // Afficher la pagination
-    renderPagination();
+  }
+
+  // Fonction pour afficher les voitures avec pagination
+  async function renderCars(page = 1) {
+    try {
+      await fetchCars();
+      currentPage = page;
+      const carList = document.getElementById("carList");
+      const pagination = document.getElementById("pagination");
+      
+      // Calculer les voitures à afficher
+      const startIndex = (page - 1) * carsPerPage;
+      const endIndex = startIndex + carsPerPage;
+      const paginatedCars = cars.slice(startIndex, endIndex);
+      
+      // Afficher les voitures
+      carList.innerHTML = "";
+      paginatedCars.forEach(car => {
+        const carCard = document.createElement("div");
+        carCard.className = "car";
+        carCard.tabIndex = 0;
+        carCard.setAttribute("role", "button");
+        carCard.setAttribute("aria-label", `Voir les détails de ${car.name}`);
+        carCard.addEventListener("click", () => openModal(car.id));
+        carCard.addEventListener("keydown", e => {
+          if(e.key === "Enter" || e.key === " ") openModal(car.id);
+        });
+
+        carCard.innerHTML = `
+          <div class="car-image">
+            <img src="${car.images[0]}" alt="${car.name}">
+            <div class="car-badge">${car.isNew ? 'Nouveau' : 'Occasion'}</div>
+          </div>
+          <div class="car-content">
+            <div class="car-header">
+              <h3>${car.name}</h3>
+              <div class="car-price">${car.price} DH</div>
+            </div>
+            <div class="car-details">
+              <div class="car-detail">
+                <i class="fas fa-calendar"></i>
+                <span>${car.year}</span>
+              </div>
+              <div class="car-detail">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>${car.mileage.toLocaleString()} km</span>
+              </div>
+              <div class="car-detail">
+                <i class="fas fa-gas-pump"></i>
+                <span>${car.fuel}</span>
+              </div>
+              <div class="car-detail">
+                <i class="fas fa-cog"></i>
+                <span>${car.transmission}</span>
+              </div>
+            </div>
+            <a href="#" class="car-cta" onclick="event.stopPropagation(); openModal('${car.id}')">
+              <i class="fas fa-info-circle"></i> Voir détails
+            </a>
+          </div>
+        `;
+        carList.appendChild(carCard);
+      });
+      
+      // Afficher la pagination
+      renderPagination();
+    } catch (error) {
+      console.error("Erreur de chargement des voitures:", error);
+      carList.innerHTML = `<p class="error">Erreur de chargement des voitures. Veuillez réessayer.</p>`;
+    }
   }
   
   // Fonction pour afficher la pagination
@@ -1823,79 +1782,85 @@
   const carSpecs = document.getElementById("carSpecs");
   const carDescription = document.getElementById("carDescription");
 
-  function openModal(carId) {
-    const car = cars.find(c => c.id === carId);
-    if (!car) return;
+  async function openModal(carId) {
+    try {
+      const carDoc = await carsCollection.doc(carId).get();
+      if (!carDoc.exists) return;
+      
+      const car = carDoc.data();
 
-    // Set car info
-    modalCarName.textContent = car.name;
-    modalCarPrice.textContent = car.price;
-    mainImage.src = car.images[0];
-    carDescription.textContent = car.description;
+      // Set car info
+      modalCarName.textContent = car.name;
+      modalCarPrice.textContent = car.price + " DH";
+      mainImage.src = car.images[0];
+      carDescription.textContent = car.description;
 
-    // Specs
-    carSpecs.innerHTML = `
-      <div class="spec-item">
-        <i class="fas fa-calendar"></i>
-        <div class="spec-text">
-          <span class="spec-label">Année</span>
-          <span class="spec-value">${car.year}</span>
+      // Specs
+      carSpecs.innerHTML = `
+        <div class="spec-item">
+          <i class="fas fa-calendar"></i>
+          <div class="spec-text">
+            <span class="spec-label">Année</span>
+            <span class="spec-value">${car.year}</span>
+          </div>
         </div>
-      </div>
-      <div class="spec-item">
-        <i class="fas fa-tachometer-alt"></i>
-        <div class="spec-text">
-          <span class="spec-label">Kilométrage</span>
-          <span class="spec-value">${car.mileage}</span>
+        <div class="spec-item">
+          <i class="fas fa-tachometer-alt"></i>
+          <div class="spec-text">
+            <span class="spec-label">Kilométrage</span>
+            <span class="spec-value">${car.mileage.toLocaleString()} km</span>
+          </div>
         </div>
-      </div>
-      <div class="spec-item">
-        <i class="fas fa-gas-pump"></i>
-        <div class="spec-text">
-          <span class="spec-label">Carburant</span>
-          <span class="spec-value">${car.fuel}</span>
+        <div class="spec-item">
+          <i class="fas fa-gas-pump"></i>
+          <div class="spec-text">
+            <span class="spec-label">Carburant</span>
+            <span class="spec-value">${car.fuel}</span>
+          </div>
         </div>
-      </div>
-      <div class="spec-item">
-        <i class="fas fa-cog"></i>
-        <div class="spec-text">
-          <span class="spec-label">Transmission</span>
-          <span class="spec-value">${car.transmission}</span>
+        <div class="spec-item">
+          <i class="fas fa-cog"></i>
+          <div class="spec-text">
+            <span class="spec-label">Transmission</span>
+            <span class="spec-value">${car.transmission}</span>
+          </div>
         </div>
-      </div>
-      <div class="spec-item">
-        <i class="fas fa-horse-head"></i>
-        <div class="spec-text">
-          <span class="spec-label">Puissance</span>
-          <span class="spec-value">${car.power}</span>
+        <div class="spec-item">
+          <i class="fas fa-horse-head"></i>
+          <div class="spec-text">
+            <span class="spec-label">Puissance</span>
+            <span class="spec-value">${car.power} ch</span>
+          </div>
         </div>
-      </div>
-      <div class="spec-item">
-        <i class="fas fa-palette"></i>
-        <div class="spec-text">
-          <span class="spec-label">Couleur</span>
-          <span class="spec-value">${car.color}</span>
+        <div class="spec-item">
+          <i class="fas fa-palette"></i>
+          <div class="spec-text">
+            <span class="spec-label">Couleur</span>
+            <span class="spec-value">${car.color}</span>
+          </div>
         </div>
-      </div>
-    `;
+      `;
 
-    // Thumbnails
-    thumbnailsContainer.innerHTML = "";
-    car.images.forEach((src, index) => {
-      const thumbnail = document.createElement("div");
-      thumbnail.className = "thumbnail";
-      if (index === 0) thumbnail.classList.add("active");
-      thumbnail.innerHTML = `<img src="${src}" alt="Thumbnail ${index + 1}">`;
-      thumbnail.addEventListener("click", () => {
-        mainImage.src = src;
-        document.querySelectorAll(".thumbnail").forEach(t => t.classList.remove("active"));
-        thumbnail.classList.add("active");
+      // Thumbnails
+      thumbnailsContainer.innerHTML = "";
+      car.images.forEach((src, index) => {
+        const thumbnail = document.createElement("div");
+        thumbnail.className = "thumbnail";
+        if (index === 0) thumbnail.classList.add("active");
+        thumbnail.innerHTML = `<img src="${src}" alt="Thumbnail ${index + 1}">`;
+        thumbnail.addEventListener("click", () => {
+          mainImage.src = src;
+          document.querySelectorAll(".thumbnail").forEach(t => t.classList.remove("active"));
+          thumbnail.classList.add("active");
+        });
+        thumbnailsContainer.appendChild(thumbnail);
       });
-      thumbnailsContainer.appendChild(thumbnail);
-    });
 
-    modal.style.display = "flex";
-    document.body.style.overflow = "hidden";
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    } catch (error) {
+      console.error("Erreur d'ouverture du modal:", error);
+    }
   }
 
   function closeModal(e) {
@@ -1954,7 +1919,7 @@
     this.reset();
   });
 
-  // Nouveau formulaire pour vendre sa voiture
+  // Formulaire pour vendre sa voiture
   document.getElementById("sellCarForm").addEventListener("submit", async function(e) {
     e.preventDefault();
     
@@ -1970,20 +1935,23 @@
     const fuel = document.getElementById("sellFuel").value;
     const transmission = document.getElementById("sellTransmission").value;
     const condition = document.getElementById("sellCondition").value;
+    const photos = document.getElementById("sellPhotos").files;
     
     // Préparer les données pour l'envoi
-    const carData = {
+    const requestData = {
+      date: new Date().toISOString(),
       name,
       phone,
       email,
-      date,
+      appointmentDate: date,
       brand,
       model,
-      year,
-      mileage,
+      year: parseInt(year),
+      mileage: parseInt(mileage),
       fuel,
       transmission,
-      condition
+      condition,
+      status: "pending" // En attente de traitement
     };
     
     // Afficher un indicateur de chargement
@@ -1995,46 +1963,31 @@
     form.classList.add('loading');
     
     try {
-      // Envoyer l'email via SMTP.js
-      Email.send({
-        SecureToken: " 3a416c4b-cceb-4bf0-84c8-0bd4765a4c46", // Remplacez par votre token SMTP
-        To: "contact@elhajiauto.com",
-        From: document.getElementById("sellEmail").value,
-        Subject: `Nouvelle demande de vente: ${brand} ${model}`,
-        Body: `
-          <h2>Nouvelle demande de vente de voiture</h2>
-          <p><strong>Nom:</strong> ${name}</p>
-          <p><strong>Téléphone:</strong> ${phone}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Date souhaitée:</strong> ${date}</p>
-          <hr>
-          <h3>Détails du véhicule</h3>
-          <p><strong>Marque:</strong> ${brand}</p>
-          <p><strong>Modèle:</strong> ${model}</p>
-          <p><strong>Année:</strong> ${year}</p>
-          <p><strong>Kilométrage:</strong> ${mileage} km</p>
-          <p><strong>Carburant:</strong> ${fuel}</p>
-          <p><strong>Transmission:</strong> ${transmission}</p>
-          <p><strong>État du véhicule:</strong></p>
-          <p>${condition}</p>
-        `
-      }).then(
-        message => {
-          if (message === "OK") {
-            // Afficher le message de succès
-            document.getElementById("successMessage").style.display = "block";
-            document.getElementById("errorMessage").style.display = "none";
-            
-            // Réinitialiser le formulaire
-            this.reset();
-          } else {
-            throw new Error("Erreur lors de l'envoi de l'email");
-          }
+      // Envoyer à Firebase
+      const docRef = await sellRequestsCollection.add(requestData);
+      
+      // Si des photos sont fournies, les uploader
+      if (photos.length > 0) {
+        const storageRef = firebase.storage().ref();
+        const uploadPromises = [];
+        
+        for (let i = 0; i < photos.length; i++) {
+          const file = photos[i];
+          const fileRef = storageRef.child(`sellRequests/${docRef.id}/${file.name}`);
+          uploadPromises.push(fileRef.put(file));
         }
-      );
+        
+        await Promise.all(uploadPromises);
+      }
+      
+      // Afficher le message de succès
+      document.getElementById("successMessage").style.display = "block";
+      document.getElementById("errorMessage").style.display = "none";
+      
+      // Réinitialiser le formulaire
+      this.reset();
     } catch (error) {
-      console.error("Erreur:", error);
-      // Afficher le message d'erreur
+      console.error("Erreur d'envoi:", error);
       document.getElementById("errorMessage").style.display = "block";
       document.getElementById("successMessage").style.display = "none";
     } finally {
@@ -2057,8 +2010,8 @@
   });
 
   // Initialisation
-  window.onload = () => {
-    renderCars();
+  window.onload = async () => {
+    await renderCars();
     showSection("accueil");
     
     // Show hero section on load
