@@ -335,17 +335,11 @@
       overflow: hidden;
       position: relative;
       background: #f5f5f5;
-      
-      /* Correction pour l'affichage mobile */
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     
-    /* Correction principale pour les images */
     .car-image img {
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
       transition: transform 0.5s ease;
     }
@@ -481,19 +475,11 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      
-      /* Correction pour l'affichage mobile */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f5f5f5;
     }
     
-    /* Correction pour les images dans la section À propos */
     .about-image img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
+      width: 100%;
+      height: auto;
       display: block;
     }
     
@@ -779,18 +765,15 @@
       border-radius: 12px;
       overflow: hidden;
       background: #f5f5f5;
-      
-      /* Correction pour le modal */
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     
     .main-image img {
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
       transition: transform 0.5s ease;
+      max-width: 100%;
+      touch-action: pan-y;
     }
     
     .thumbnails {
@@ -1108,7 +1091,7 @@
       }
       
       .about-image {
-        max-width: 100%;
+        max-width: 600px;
         margin: 0 auto;
       }
       
@@ -1127,7 +1110,13 @@
       }
       
       .main-image {
-        height: 300px;
+        height: auto;
+        max-height: 50vh;
+        aspect-ratio: 16/9;
+      }
+      
+      .main-image img {
+        object-fit: cover;
       }
       
       .modal-actions {
@@ -1185,15 +1174,6 @@
         flex-direction: column;
       }
       
-      /* Correction supplémentaire pour les images des voitures sur mobile */
-      .car-image {
-        height: 200px;
-      }
-      
-      .car-image img {
-        max-height: 180px;
-      }
-      
       /* Ajustements supplémentaires pour le modal sur mobile */
       .modal-header {
         padding: 20px 20px 10px;
@@ -1207,12 +1187,12 @@
         font-size: 1.5rem;
       }
       
-      .main-image {
-        height: 250px;
+      .thumbnails {
+        grid-template-columns: repeat(4, 1fr);
       }
       
       .thumbnail {
-        height: 80px;
+        height: 60px;
       }
     }
     
@@ -1252,8 +1232,8 @@
         padding: 0 15px 15px;
       }
       
-      .main-image {
-        height: 200px;
+      .thumbnail {
+        height: 50px;
       }
       
       .modal-header {
@@ -1288,14 +1268,6 @@
       .modal-description {
         font-size: 0.9rem;
         margin: 15px 0;
-      }
-      
-      .thumbnails {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .thumbnail {
-        height: 70px;
       }
     }
     
@@ -1907,7 +1879,10 @@
       // Set car info
       modalCarName.textContent = car.name;
       modalCarPrice.textContent = car.price + " DH";
-      mainImage.src = car.images[0];
+      mainImage.src = ""; // Clear first to force reload
+      setTimeout(() => {
+        mainImage.src = car.images[0];
+      }, 10);
       mainImage.alt = car.name;
       carDescription.textContent = car.description;
 
@@ -1965,7 +1940,10 @@
         if (index === 0) thumbnail.classList.add("active");
         thumbnail.innerHTML = `<img src="${src}" alt="Thumbnail ${index + 1}">`;
         thumbnail.addEventListener("click", () => {
-          mainImage.src = src;
+          mainImage.src = "";
+          setTimeout(() => {
+            mainImage.src = src;
+          }, 10);
           document.querySelectorAll(".thumbnail").forEach(t => t.classList.remove("active"));
           thumbnail.classList.add("active");
         });
