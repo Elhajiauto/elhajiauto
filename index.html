@@ -335,11 +335,17 @@
       overflow: hidden;
       position: relative;
       background: #f5f5f5;
+      
+      /* Correction pour l'affichage mobile */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
+    /* Correction principale pour les images */
     .car-image img {
-      width: 100%;
-      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
       object-fit: contain;
       transition: transform 0.5s ease;
     }
@@ -475,11 +481,19 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      
+      /* Correction pour l'affichage mobile */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
     }
     
+    /* Correction pour les images dans la section À propos */
     .about-image img {
-      width: 100%;
-      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
       display: block;
     }
     
@@ -765,11 +779,16 @@
       border-radius: 12px;
       overflow: hidden;
       background: #f5f5f5;
+      
+      /* Correction pour le modal */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     .main-image img {
-      width: 100%;
-      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
       object-fit: contain;
       transition: transform 0.5s ease;
     }
@@ -1089,7 +1108,7 @@
       }
       
       .about-image {
-        max-width: 600px;
+        max-width: 100%;
         margin: 0 auto;
       }
       
@@ -1164,6 +1183,15 @@
       
       .modal-actions {
         flex-direction: column;
+      }
+      
+      /* Correction supplémentaire pour les images des voitures sur mobile */
+      .car-image {
+        height: 200px;
+      }
+      
+      .car-image img {
+        max-height: 180px;
       }
       
       /* Ajustements supplémentaires pour le modal sur mobile */
