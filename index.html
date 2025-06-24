@@ -329,7 +329,7 @@
       transform: translateY(-8px);
       box-shadow: 0 15px 30px rgba(0,0,0,0.15);
     }
-    
+
   .car-image {
     width: 100%;
     height: 250px;
@@ -392,7 +392,7 @@
     
     .car-details {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr));
       gap: 12px;
       margin-bottom: 20px;
     }
@@ -510,6 +510,29 @@
       line-height: 1.8;
     }
     
+    .about-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .stat-item {
+      text-align: center;
+      min-width: 100px;
+    }
+    
+    .stat-item .number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--secondary);
+    }
+    
+    .stat-item .label {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+    
     /* Nouveau style pour la section "Vendre ma voiture" */
     .sell-form-container {
       max-width: 800px;
@@ -581,6 +604,28 @@
     .form-group textarea {
       min-height: 120px;
       resize: vertical;
+    }
+    
+    .submit-btn {
+      padding: 16px 40px;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    
+    .submit-btn:hover {
+      background: #2b6cb0;
     }
     
     /* Section Contact avec formulaire */
@@ -671,6 +716,31 @@
     .social-links a:hover {
       background: var(--secondary);
       transform: translateY(-3px);
+    }
+    
+    .contact-form {
+      padding: 50px;
+    }
+    
+    .contact-form h3 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      position: relative;
+      color: var(--primary);
+    }
+    
+    .contact-form h3::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--secondary);
+    }
+    
+    .contact-form .form-group {
+      margin-bottom: 20px;
     }
     
     /* Modal amélioré */
@@ -1180,6 +1250,10 @@
         width: 100%;
         margin-bottom: 10px;
       }
+      
+      .sell-form-container {
+        padding: 30px;
+      }
     }
     
       @media (max-width: 768px) {
@@ -1267,6 +1341,10 @@
       
       .thumbnail {
         height: 80px;
+      }
+      
+      .contact-info, .contact-form {
+        padding: 30px;
       }
     }
     
@@ -1638,7 +1716,7 @@
         </div>
         <div class="contact-text">
           <h4>Adresse</h4>
-          <p>123 Avenue Hassan II, Casablanca, Maroc</p>
+          <p>123 Avenue Hassan II, Tanger</p>
         </div>
       </div>
       
@@ -1820,6 +1898,7 @@
   // Références aux collections
   const carsCollection = db.collection("cars");
   const sellRequestsCollection = db.collection("sellRequests");
+  const contactMessagesCollection = db.collection("contactMessages");
 
   // Configuration de la pagination
   const carsPerPage = 9;
@@ -2159,13 +2238,42 @@
   });
 
   // Contact form submission
-  document.getElementById("contactForm").addEventListener("submit", function(e) {
+  document.getElementById("contactForm").addEventListener("submit", async function(e) {
     e.preventDefault();
-    alert("Merci pour votre message ! Nous vous contacterons très rapidement.");
-    this.reset();
+    
+    // Récupérer les valeurs du formulaire
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+    
+    // Préparer les données pour l'envoi
+    const messageData = {
+      date: firebase.firestore.Timestamp.fromDate(new Date()),
+      name,
+      email,
+      phone,
+      subject,
+      message,
+      status: "unread"
+    };
+    
+    try {
+      // Envoyer à Firebase
+      await contactMessagesCollection.add(messageData);
+      
+      // Afficher un message de succès
+      alert("Merci pour votre message ! Nous vous contacterons très rapidement.");
+      this.reset();
+    } catch (error) {
+      console.error("Erreur d'envoi:", error);
+      alert("Une erreur s'est produite. Veuillez réessayer plus tard.");
+    }
   });
 
-  // Formulaire pour vendre sa voiture
+  // Formulaire pour vendre sa voiture - VERSION CORRIGÉE
+  // Formulaire pour vendre sa voiture - VERSION CORRIGÉE
   document.getElementById("sellCarForm").addEventListener("submit", async function(e) {
     e.preventDefault();
     
@@ -2181,14 +2289,21 @@
     const fuel = document.getElementById("sellFuel").value;
     const transmission = document.getElementById("sellTransmission").value;
     const condition = document.getElementById("sellCondition").value;
+    const files = document.getElementById("sellPhotos").files;
     
-    // Préparer les données pour l'envoi
+    // Vérifier les champs obligatoires
+    if (!name || !phone || !email || !date || !brand || !model || !year || !mileage || !fuel || !transmission || !condition) {
+      showError("Veuillez remplir tous les champs obligatoires");
+      return;
+    }
+
+    // Préparer les données pour l'envoi avec format correct
     const requestData = {
-      date: new Date().toISOString(),
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       name,
       phone,
       email,
-      appointmentDate: date,
+      appointmentDate: new Date(date),
       brand,
       model,
       year: parseInt(year),
@@ -2196,18 +2311,28 @@
       fuel,
       transmission,
       condition,
-      status: "pending" // En attente de traitement
+      status: "pending",
+      photos: []
     };
-    
+
     // Afficher un indicateur de chargement
     const submitBtn = document.getElementById("submitBtn");
-    const form = document.getElementById("sellCarForm");
-    
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
     submitBtn.disabled = true;
-    form.classList.add('loading');
-    
+    document.getElementById("sellCarForm").classList.add('loading');
+
     try {
+      // Uploader les photos si elles existent
+      if (files.length > 0) {
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const storageRef = firebase.storage().ref(`sellRequests/${Date.now()}_${file.name}`);
+          await storageRef.put(file);
+          const url = await storageRef.getDownloadURL();
+          requestData.photos.push(url);
+        }
+      }
+
       // Envoyer à Firebase
       await sellRequestsCollection.add(requestData);
       
@@ -2219,15 +2344,27 @@
       this.reset();
     } catch (error) {
       console.error("Erreur d'envoi:", error);
-      document.getElementById("errorMessage").style.display = "block";
-      document.getElementById("successMessage").style.display = "none";
+      showError(`Erreur technique: ${error.message || "Veuillez réessayer plus tard"}`);
     } finally {
       // Réinitialiser le bouton
       submitBtn.innerHTML = '<i class="fas fa-calendar-check"></i> Prendre rendez-vous';
       submitBtn.disabled = false;
-      form.classList.remove('loading');
+      document.getElementById("sellCarForm").classList.remove('loading');
     }
   });
+
+  // Fonction pour afficher les erreurs
+  function showError(message) {
+    const errorElement = document.getElementById("errorMessage");
+    errorElement.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+    errorElement.style.display = "block";
+    document.getElementById("successMessage").style.display = "none";
+    
+    // Cacher le message après 5 secondes
+    setTimeout(() => {
+      errorElement.style.display = "none";
+    }, 5000);
+  }
 
   // Navigation event listeners
   document.querySelectorAll("nav a, .footer-links a, .hero-buttons button").forEach(element => {
