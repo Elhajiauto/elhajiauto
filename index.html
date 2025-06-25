@@ -58,6 +58,88 @@
       display: flex;
       align-items: center;
       gap: 15px;
+      cursor: pointer; /* Ajout du curseur pointer */
+      transition: transform 0.3s ease; /* Animation de transition */
+    }
+    
+    .logo:hover {
+      transform: scale(1.05); /* Effet de zoom au survol */
+    }
+    
+    .logo-icon {
+      background: var(--secondary);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+    }
+    
+    .logo-text h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    
+    .logo-text p {
+      font-size: 0.9rem;
+      color: #cbd5e0;
+    }
+    
+    /* ... (le reste du CSS reste inchangé) ... */
+    
+    /* Animation pour la transition de page */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .section {
+      animation: fadeIn 0.5s ease forwards;
+    }
+    
+    /* ... (le reste du CSS reste inchangé) ... */
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    
+    /* Header amélioré avec logo */
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
     
     .logo-icon {
@@ -393,7 +475,7 @@
     
     .car-details {
       display: grid;
-      grid-template-columns: repeat(2, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
       margin-bottom: 20px;
     }
@@ -1363,8 +1445,7 @@
         font-size: 2rem;
       }
       
-      .contact-info,
-      .contact-form {
+      .contact-info, .contact-form {
         padding: 30px 20px;
       }
       
@@ -1455,13 +1536,136 @@
         font-size: 0.85rem;
       }
     }
+	.modal-btn.btn-call {
+  background-color: #2b6cb0;
+  color: white;
+}
+
+.modal-btn.btn-call:hover {
+  background-color: #2b6cb0;
+}
+
+/* 📞 Popup Styling */
+.call-popup {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
+}
+
+.call-popup-content {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  max-width: 400px;
+  width: 90%;
+}
+
+.call-popup-content h4 {
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  color: var(--primary);
+}
+
+.call-popup-content ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.call-popup-content li {
+  margin-bottom: 15px;
+}
+
+.call-popup-content a {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--secondary);
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+.call-popup-content a:hover {
+  color: var(--accent);
+}
+
+.close-call-popup {
+  padding: 10px 25px;
+  background-color: var(--gray);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.close-call-popup:hover {
+  background-color: #4a5568;
+}
+    /* ... styles précédents ... */
+    
+    /* Nouveaux styles pour les cartes de service cliquables */
+    .service-card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+    
+    .service-card-link:hover {
+      transform: translateY(-5px);
+    }
+    
+    .service-card-link:hover .service-card {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      border: 2px solid var(--secondary);
+    }
+    
+    .service-card {
+      height: 100%;
+    }
+    
+    /* Ajout d'un indicateur visuel pour les cartes cliquables */
+    .service-card:after {
+      content: "Cliquez pour en savoir plus";
+      display: block;
+      margin-top: 15px;
+      font-size: 0.85rem;
+      color: var(--secondary);
+      font-weight: 600;
+    }
+    
+    /* Styles pour le nouveau service "Reprise" */
+    .service-card.reprise .service-icon {
+      background: rgba(72, 187, 120, 0.1);
+      color: #2b6cb0;
+    }
+    
+    /* Animation de survol pour les liens */
+    .footer-links a:hover {
+      color: var(--secondary);
+      transform: translateX(5px);
+    }
+    
+    /* ... autres styles précédents ... */
+	
   </style>
 </head>
 <body>
 
 <header>
   <div class="header-container">
-    <div class="logo">
+    <!-- Modification ici: Ajout d'un ID pour le logo -->
+    <div class="logo" id="logo">
       <div class="logo-icon">
         <i class="fas fa-car"></i>
       </div>
@@ -1507,37 +1711,49 @@
   </div>
   
   <div class="services">
-    <div class="service-card">
-      <div class="service-icon">
-        <i class="fas fa-car"></i>
+    <!-- Service 1: Achat de Véhicules -->
+    <a href="#voitures" class="service-card-link" data-section="voitures">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-car"></i>
+        </div>
+        <h3>Achat de Véhicules</h3>
+        <p>Découvrez notre large sélection de véhicules neufs et d'occasion, rigoureusement inspectés et garantis.</p>
       </div>
-      <h3>Achat de Véhicules</h3>
-      <p>Découvrez notre large sélection de véhicules neufs et d'occasion, rigoureusement inspectés et garantis.</p>
-    </div>
+    </a>
     
-    <div class="service-card">
-      <div class="service-icon">
-        <i class="fas fa-hand-holding-usd"></i>
+    <!-- Nouveau service: Reprise -->
+    <a href="#contact" class="service-card-link" data-section="contact">
+      <div class="service-card reprise">
+        <div class="service-icon">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        <h3>Reprise</h3>
+        <p>Estimez et vendez votre ancien véhicule rapidement et au meilleur prix</p>
       </div>
-      <h3>Financement</h3>
-      <p>Solutions de financement sur mesure avec nos partenaires bancaires pour réaliser votre projet automobile.</p>
-    </div>
+    </a>
     
-    <div class="service-card">
-      <div class="service-icon">
-        <i class="fas fa-sync-alt"></i>
+    <!-- Service 2: Vendez votre voiture -->
+    <a href="#vendre" class="service-card-link" data-section="vendre">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-hand-holding-usd"></i>
+        </div>
+        <h3>Vendez votre voiture</h3>
+        <p>Estimez et vendez votre voiture au meilleur prix en quelques minutes</p>
       </div>
-      <h3>Reprise</h3>
-      <p>Estimation gratuite et reprise de votre véhicule actuel au meilleur prix pour votre nouvel achat.</p>
-    </div>
+    </a>
     
-    <div class="service-card">
-      <div class="service-icon">
-        <i class="fas fa-tools"></i>
+    <!-- Service 3: Notre garage de mécanicien -->
+    <a href="https://maps.app.goo.gl/u8FNrfQ3N8Pwy8RM8" target="_blank" class="service-card-link">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <h3>Notre garage de mécanicien</h3>
+        <p>Atelier équipé avec des techniciens experts pour l'entretien et la réparation de votre véhicule.</p>
       </div>
-      <h3>Entretien & Réparation</h3>
-      <p>Atelier équipé avec des techniciens experts pour l'entretien et la réparation de votre véhicule.</p>
-    </div>
+    </a>
   </div>
 </section>
 
@@ -1751,12 +1967,21 @@
         </div>
       </div>
       
-      <div class="social-links">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-      </div>
+<div class="social-links">
+  <a href="https://facebook.com/elhajiauto" target="_blank" aria-label="Facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="https://instagram.com/elhajiauto" target="_blank" aria-label="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://wa.me/212658629841" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <a href="https://tiktok.com/@elhajiauto" target="_blank" aria-label="TikTok">
+    <i class="fab fa-tiktok"></i>
+  </a>
+</div>
+
     </div>
     
     <div class="contact-form">
@@ -1782,8 +2007,8 @@
           <select id="subject">
             <option value="info">Demande d'information</option>
             <option value="rdv">Prendre rendez-vous</option>
-            <option value="test">Demande d'essai</option>
-            <option value="service">Service après-vente</option>
+            <option value="test">Reprise</option>
+            <option value="service">Service de mechanicien</option>
           </select>
         </div>
         
@@ -1803,12 +2028,13 @@
     <div class="footer-col">
       <h4>ElHaji Auto</h4>
       <p>Votre concessionnaire automobile de confiance au Maroc depuis 2010, offrant une sélection premium de véhicules neufs et d'occasion.</p>
-      <div class="footer-social">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-      </div>
+<div class="footer-social">
+  <a href="https://facebook.com/elhajiauto" target="_blank"><i class="fab fa-facebook-f"></i></a>
+  <a href="https://instagram.com/elhajiauto" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://wa.me/212658629841" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://tiktok.com/@elhajiauto" target="_blank"><i class="fab fa-tiktok"></i></a>
+</div>
+
     </div>
     
     <div class="footer-col">
@@ -1825,13 +2051,13 @@
     
     <div class="footer-col">
       <h4>Nos Services</h4>
-      <ul class="footer-links">
-        <li><a href="#"><i class="fas fa-chevron-right"></i> Achat de véhicules</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i> Financement</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i> Reprise</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i> Entretien & Réparation</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i> Garanties étendues</a></li>
-      </ul>
+<ul class="footer-links">
+  <li><a href="#voitures" data-section="voitures"><i class="fas fa-chevron-right"></i> Achat de véhicules</a></li>
+  <li><a href="#contact" data-section="contact"><i class="fas fa-chevron-right"></i> Reprise</a></li>
+  <li><a href="#vendre" data-section="vendre"><i class="fas fa-chevron-right"></i> Vendez votre voiture</a></li>
+  <li><a href="https://maps.app.goo.gl/u8FNrfQ3N8Pwy8RM8" target="_blank"><i class="fas fa-chevron-right"></i> Notre garage de mécanicien</a></li>
+</ul>
+
     </div>
     
     <div class="footer-col">
@@ -1869,8 +2095,29 @@
         <div class="car-specs" id="carSpecs"></div>
         <div class="modal-description" id="carDescription"></div>
         <div class="modal-actions">
-          <a href="#" class="modal-btn btn-contact"><i class="fas fa-phone"></i> Contacter</a>
-          <a href="#" class="modal-btn btn-testdrive"><i class="fas fa-calendar-check"></i> Essai gratuit</a>
+		<div class="modal-actions">
+  <a href="https://wa.me/212658629841" target="_blank" class="modal-btn btn-contact">
+    <i class="fab fa-whatsapp"></i> WhatsApp
+  </a>
+
+  <button onclick="toggleCallPopup()" class="modal-btn btn-contact">
+    <i class="fas fa-phone"></i> Appelle-moi
+  </button>
+</div>
+
+<!-- 📞 Popup des numéros -->
+<div id="callPopup" class="call-popup">
+  <div class="call-popup-content">
+    <h4>Choisissez un numéro :</h4>
+    <ul>
+      <li><a href="tel:0658629841"><i class="fas fa-phone-alt"></i> 0658 62 98 41</a></li>
+      <li><a href="tel:0672110078"><i class="fas fa-phone-alt"></i> 0672 11 00 78</a></li>
+      <li><a href="tel:0663080262"><i class="fas fa-phone-alt"></i> 0663 08 02 62</a></li>
+    </ul>
+    <button onclick="toggleCallPopup()" class="close-call-popup">Fermer</button>
+  </div>
+</div>
+
         </div>
       </div>
     </div>
@@ -1895,6 +2142,7 @@
   // Initialisation Firebase
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
+  const storage = firebase.storage();
 
   // Références aux collections
   const carsCollection = db.collection("cars");
@@ -2274,7 +2522,6 @@
   });
 
   // Formulaire pour vendre sa voiture - VERSION CORRIGÉE
-  // Formulaire pour vendre sa voiture - VERSION CORRIGÉE
   document.getElementById("sellCarForm").addEventListener("submit", async function(e) {
     e.preventDefault();
     
@@ -2298,24 +2545,6 @@
       return;
     }
 
-    // Préparer les données pour l'envoi avec format correct
-    const requestData = {
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      name,
-      phone,
-      email,
-      appointmentDate: new Date(date),
-      brand,
-      model,
-      year: parseInt(year),
-      mileage: parseInt(mileage),
-      fuel,
-      transmission,
-      condition,
-      status: "pending",
-      photos: []
-    };
-
     // Afficher un indicateur de chargement
     const submitBtn = document.getElementById("submitBtn");
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
@@ -2323,15 +2552,39 @@
     document.getElementById("sellCarForm").classList.add('loading');
 
     try {
+      // Préparer les données pour l'envoi
+      const requestData = {
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        name,
+        phone,
+        email,
+        appointmentDate: new Date(date),
+        brand,
+        model,
+        year: parseInt(year),
+        mileage: parseInt(mileage),
+        fuel,
+        transmission,
+        condition,
+        status: "pending",
+        photos: []
+      };
+
       // Uploader les photos si elles existent
       if (files.length > 0) {
+        const uploadPromises = [];
+        
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
-          const storageRef = firebase.storage().ref(`sellRequests/${Date.now()}_${file.name}`);
-          await storageRef.put(file);
-          const url = await storageRef.getDownloadURL();
-          requestData.photos.push(url);
+          const storageRef = storage.ref(`sellRequests/${Date.now()}_${file.name}`);
+          uploadPromises.push(
+            storageRef.put(file).then(snapshot => snapshot.ref.getDownloadURL())
+          );
         }
+        
+        // Attendre que toutes les photos soient uploadées
+        const photoUrls = await Promise.all(uploadPromises);
+        requestData.photos = photoUrls;
       }
 
       // Envoyer à Firebase
@@ -2386,6 +2639,103 @@
     // Show hero section on load
     document.querySelector('.hero').style.display = 'flex';
   };
+  function toggleCallPopup() {
+  const popup = document.getElementById("callPopup");
+  const isVisible = popup.style.display === "flex";
+  popup.style.display = isVisible ? "none" : "flex";
+}
+  // ... script précédent ...
+
+  // Modification de la fonction showSection pour gérer le défilement doux
+  function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('.section').forEach(section => {
+      section.classList.remove('active');
+    });
+    
+    // Show the selected section
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.classList.add('active');
+      
+      // Scroll to section with smooth behavior
+      setTimeout(() => {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
+    
+    // Update active nav link
+    document.querySelectorAll("nav a, .footer-links a").forEach(link => {
+      link.classList.remove("active");
+      if (link.getAttribute("data-section") === sectionId) {
+        link.classList.add("active");
+      }
+    });
+  }
+
+  // Navigation event listeners
+  document.querySelectorAll("nav a, .footer-links a, .hero-buttons button, .service-card-link").forEach(element => {
+    element.addEventListener("click", function(e) {
+      // Pour les liens externes, on ne fait rien de spécial
+      if (this.target === "_blank" || this.href.includes("maps.app.goo.gl")) return;
+      
+      e.preventDefault();
+      const sectionId = this.getAttribute("data-section") || this.getAttribute("href")?.substring(1);
+      if (sectionId) {
+        showSection(sectionId);
+      }
+    });
+  });
+
+  // ... (le reste du code JavaScript) ...
+
+  // Ajout d'un écouteur d'événement pour le logo
+  document.getElementById("logo").addEventListener("click", function() {
+    showSection("accueil");
+  });
+
+  // Fonction pour montrer une section
+  function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('.section').forEach(section => {
+      section.classList.remove('active');
+    });
+    
+    // Show the selected section
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.classList.add('active');
+      
+      // Scroll to section
+      setTimeout(() => {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
+    
+    // Update active nav link
+    document.querySelectorAll("nav a, .footer-links a").forEach(link => {
+      link.classList.remove("active");
+      if (link.getAttribute("data-section") === sectionId) {
+        link.classList.add("active");
+      }
+    });
+  }
+
+  // Initialisation
+  window.onload = async () => {
+    await renderCars();
+    showSection("accueil");
+    
+    // Show hero section on load
+    document.querySelector('.hero').style.display = 'flex';
+    
+    // Ajout de l'écouteur pour le logo
+    document.getElementById("logo").addEventListener("click", function() {
+      showSection("accueil");
+    });
+  };
+
+  // ... (le reste du code JavaScript) ...
 </script>
 
 </body>
