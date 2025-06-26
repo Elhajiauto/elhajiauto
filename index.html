@@ -1584,7 +1584,51 @@
       transform: translateX(5px);
     }
     
-    /* ... autres styles précédents ... */
+/* Nouveaux styles pour les cartes de service cliquables */
+.service-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+
+.service-card-link:hover {
+  transform: translateY(-5px);
+}
+
+.service-card-link:hover .service-card {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  border: 2px solid var(--secondary);
+}
+
+.service-card {
+  height: 100%;
+}
+
+/* Ajout d'un indicateur visuel pour les cartes cliquables */
+.service-card:after {
+  content: "Cliquez pour en savoir plus";
+  display: block;
+  margin-top: 15px;
+  font-size: 0.85rem;
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+/* Styles pour le nouveau service "Reprise" */
+.service-card.reprise .service-icon {
+  background: rgba(72, 187, 120, 0.1);
+  color: #2b6cb0;
+}
+
+/* Animation de survol pour les liens */
+.footer-links a:hover {
+  color: var(--secondary);
+  transform: translateX(5px);
+}
 	
   </style>
 </head>
@@ -1636,51 +1680,51 @@
     <p>ElHaji Auto propose une gamme complète de services pour répondre à tous vos besoins automobiles</p>
   </div>
   
-  <div class="services">
-    <!-- Service 1: Achat de Véhicules -->
-    <a href="#voitures" class="service-card-link" data-section="voitures">
-      <div class="service-card">
-        <div class="service-icon">
-          <i class="fas fa-car"></i>
-        </div>
-        <h3>Achat de Véhicules</h3>
-        <p>Découvrez notre large sélection de véhicules neufs et d'occasion, rigoureusement inspectés et garantis.</p>
+<div class="services">
+  <!-- Service 1: Achat de Véhicules -->
+  <a href="#voitures" class="service-card-link" data-section="voitures">
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-car"></i>
       </div>
-    </a>
-    
-    <!-- Nouveau service: Reprise -->
-    <a href="#contact" class="service-card-link" data-section="contact">
-      <div class="service-card reprise">
-        <div class="service-icon">
-          <i class="fas fa-exchange-alt"></i>
-        </div>
-        <h3>Reprise</h3>
-        <p>Estimez et vendez votre ancien véhicule rapidement et au meilleur prix</p>
+      <h3>Achat de Véhicules</h3>
+      <p>Découvrez notre large sélection de véhicules neufs et d'occasion, rigoureusement inspectés et garantis.</p>
+    </div>
+  </a>
+  
+  <!-- Service 2: Reprise -->
+  <a href="#contact" class="service-card-link" data-section="contact">
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-exchange-alt"></i>
       </div>
-    </a>
-    
-    <!-- Service 2: Vendez votre voiture -->
-    <a href="#vendre" class="service-card-link" data-section="vendre">
-      <div class="service-card">
-        <div class="service-icon">
-          <i class="fas fa-hand-holding-usd"></i>
-        </div>
-        <h3>Vendez votre voiture</h3>
-        <p>Estimez et vendez votre voiture au meilleur prix en quelques minutes</p>
+      <h3>Reprise</h3>
+      <p>Estimez et vendez votre ancien véhicule rapidement et au meilleur prix</p>
+    </div>
+  </a>
+  
+  <!-- Service 3: Vendez votre voiture -->
+  <a href="#vendre" class="service-card-link" data-section="vendre">
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-hand-holding-usd"></i>
       </div>
-    </a>
-    
-    <!-- Service 3: Notre garage de mécanicien -->
-    <a href="https://maps.app.goo.gl/u8FNrfQ3N8Pwy8RM8" target="_blank" class="service-card-link">
-      <div class="service-card">
-        <div class="service-icon">
-          <i class="fas fa-tools"></i>
-        </div>
-        <h3>Notre garage de mécanicien</h3>
-        <p>Atelier équipé avec des techniciens experts pour l'entretien et la réparation de votre véhicule.</p>
+      <h3>Vendez votre voiture</h3>
+      <p>Estimez et vendez votre voiture au meilleur prix en quelques minutes</p>
+    </div>
+  </a>
+  
+  <!-- Service 4: Notre garage de mécanicien -->
+  <a href="https://maps.app.goo.gl/u8FNrfQ3N8Pwy8RM8" target="_blank" class="service-card-link">
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-tools"></i>
       </div>
-    </a>
-  </div>
+      <h3>Notre garage de mécanicien</h3>
+      <p>Atelier équipé avec des techniciens experts pour l'entretien et la réparation de votre véhicule.</p>
+    </div>
+  </a>
+</div>
 </section>
 
 <section id="voitures" class="section">
@@ -2601,6 +2645,17 @@
       showSection("accueil");
     });
   };
+  document.querySelectorAll("nav a, .footer-links a, .hero-buttons button, .service-card-link").forEach(element => {
+  element.addEventListener("click", function(e) {
+    if (this.hasAttribute("data-section")) {
+      e.preventDefault();
+      const sectionId = this.getAttribute("data-section");
+      if (sectionId) {
+        showSection(sectionId);
+      }
+    }
+  });
+});
 </script>
 
 </body>
