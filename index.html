@@ -33,7 +33,6 @@
       scroll-behavior: smooth;
     }
     
-    /* Header amélioré avec logo */
     header {
       background-color: var(--primary);
       color: white;
@@ -86,7 +85,6 @@
       color: #cbd5e0;
     }
     
-    /* Navigation améliorée */
     nav {
       display: flex;
       background-color: var(--primary);
@@ -125,7 +123,6 @@
       width: 80%;
     }
     
-    /* Hero section premium */
     .hero {
       position: relative;
       background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1350&q=80');
@@ -219,7 +216,6 @@
       }
     }
     
-    /* Sections générales */
     .section {
       padding: 80px 20px;
       max-width: 1200px;
@@ -263,7 +259,6 @@
       font-size: 1.1rem;
     }
     
-    /* Section Services */
     .services {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -279,6 +274,7 @@
       transition: all 0.4s ease;
       text-align: center;
       padding: 40px 25px;
+      height: 100%;
     }
     
     .service-card:hover {
@@ -310,7 +306,6 @@
       line-height: 1.8;
     }
     
-    /* Section Voitures avec pagination */
     .cars-container {
       position: relative;
     }
@@ -336,50 +331,44 @@
       box-shadow: 0 15px 30px rgba(0,0,0,0.15);
     }
 
-.car-image {
-  position: relative;
-  width: 100%;
-  height: 250px;
-  overflow: hidden;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-    
-    /* Correction principale pour les images */
-  .car-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    transition: transform 0.5s ease;
-  }
-    
-      .car:hover .car-image img {
-        transform: scale(1.05);
+    .car-image {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
-.car-badge {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  background: var(--accent);
-  color: white;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  z-index: 10;
-  opacity: 1 !important;
-  visibility: visible !important;
-  transition: none !important;
-}
-
+    .car-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      transition: transform 0.5s ease;
+    }
+    
+    .car:hover .car-image img {
+      transform: scale(1.05);
+    }
+    
+    .car-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: var(--accent);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 10;
+    }
     
     .car-content {
       padding: 25px;
@@ -438,7 +427,6 @@
       background: #2b6cb0;
     }
     
-    /* Pagination */
     .pagination {
       display: flex;
       justify-content: center;
@@ -484,7 +472,6 @@
       cursor: not-allowed;
     }
     
-    /* Section À propos améliorée */
     .about-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -496,15 +483,12 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      
-      /* Correction pour l'affichage mobile */
       display: flex;
       align-items: center;
       justify-content: center;
       background: #f5f5f5;
     }
     
-    /* Correction pour les images dans la section À propos */
     .about-image img {
       max-width: 100%;
       max-height: 100%;
@@ -546,7 +530,6 @@
       font-size: 0.9rem;
     }
     
-    /* Nouveau style pour la section "Vendre ma voiture" */
     .sell-form-container {
       max-width: 800px;
       margin: 0 auto;
@@ -641,7 +624,6 @@
       background: #2b6cb0;
     }
     
-    /* Section Contact avec formulaire */
     .contact-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -756,7 +738,6 @@
       margin-bottom: 20px;
     }
     
-    /* Modal amélioré */
     .modal {
       display: none;
       position: fixed;
@@ -864,7 +845,6 @@
       display: block;
     }
     
-    /* Styles pour la navigation d'images */
     .image-nav {
       position: absolute;
       top: 50%;
@@ -1031,7 +1011,6 @@
       background: rgba(49,130,206,0.1);
     }
     
-    /* Footer premium */
     footer {
       background: var(--primary);
       color: white;
@@ -1130,7 +1109,6 @@
       font-size: 0.9rem;
     }
     
-    /* Back to top button */
     .back-to-top {
       position: fixed;
       bottom: 30px;
@@ -1162,7 +1140,6 @@
       transform: translateY(-5px);
     }
     
-    /* New styles for sell form */
     .form-notification {
       padding: 15px;
       margin: 20px 0;
@@ -1220,9 +1197,107 @@
       100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
     
-    /* ========== CORRECTIONS MOBILE ========== */
+    .modal-btn.btn-call {
+      background-color: #2b6cb0;
+      color: white;
+    }
+
+    .call-popup {
+      display: none;
+      position: fixed;
+      z-index: 3000;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .call-popup-content {
+      background: white;
+      padding: 30px 25px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .call-popup-content h4 {
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+      color: var(--primary);
+    }
+
+    .call-popup-content ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .call-popup-content li {
+      margin-bottom: 15px;
+    }
+
+    .call-popup-content a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--secondary);
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+
+    .call-popup-content a:hover {
+      color: var(--accent);
+    }
+
+    .close-call-popup {
+      padding: 10px 25px;
+      background-color: var(--gray);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .close-call-popup:hover {
+      background-color: #4a5568;
+    }
     
-    /* Améliorations pour le modal sur mobile */
+    .service-card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+    
+    .service-card-link:hover {
+      transform: translateY(-5px);
+    }
+    
+    .service-card-link:hover .service-card {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      border: 2px solid var(--secondary);
+    }
+    
+    .service-card:after {
+      content: "Cliquez pour en savoir plus";
+      display: block;
+      margin-top: 15px;
+      font-size: 0.85rem;
+      color: var(--secondary);
+      font-weight: 600;
+    }
+    
+    .service-card.reprise .service-icon {
+      background: rgba(72, 187, 120, 0.1);
+      color: #2b6cb0;
+    }
+    
     @media (max-width: 992px) {
       .about-content,
       .contact-container,
@@ -1243,7 +1318,6 @@
         padding: 60px 20px;
       }
       
-      /* Ajustements spécifiques pour le modal */
       .modal-main {
         padding: 0 20px 20px;
         gap: 20px;
@@ -1267,9 +1341,9 @@
       }
     }
     
-      @media (max-width: 768px) {
-        .car-image {
-          height: 200px;
+    @media (max-width: 768px) {
+      .car-image {
+        height: 200px;
       }
       
       nav {
@@ -1307,33 +1381,11 @@
         grid-template-columns: 1fr;
       }
       
-      .modal-actions {
-        flex-direction: column;
-      }
-      
-      /* Correction supplémentaire pour les images des voitures sur mobile */
       .car-image {
         width: 100%;
         height: 250px;
-        overflow: hidden;
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
       
-      .car-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-        transition: transform 0.5s ease;
-      }
-      
-      /* Ajustements supplémentaires pour le modal sur mobile */
       .modal-header {
         padding: 20px 20px 10px;
       }
@@ -1389,7 +1441,6 @@
         flex: 1 0 calc(100% - 30px);
       }
       
-      /* Ajustements finaux pour le modal sur très petits écrans */
       .modal-main {
         padding: 0 15px 15px;
       }
@@ -1441,7 +1492,6 @@
       }
     }
     
-    /* Ajout d'une animation de fermeture pour le modal */
     .modal.closing .modal-content {
       animation: modalFadeOut 0.3s ease forwards;
     }
@@ -1451,7 +1501,6 @@
       to {opacity: 0; transform: translateY(50px);}
     }
     
-    /* Amélioration du contraste pour la navigation mobile */
     @media (max-width: 768px) {
       nav {
         overflow-x: auto;
@@ -1464,179 +1513,12 @@
         font-size: 0.85rem;
       }
     }
-	.modal-btn.btn-call {
-  background-color: #2b6cb0;
-  color: white;
-}
-
-.modal-btn.btn-call:hover {
-  background-color: #2b6cb0;
-}
-
-/* 📞 Popup Styling */
-.call-popup {
-  display: none;
-  position: fixed;
-  z-index: 3000;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  align-items: center;
-  justify-content: center;
-}
-
-.call-popup-content {
-  background: white;
-  padding: 30px 25px;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  max-width: 400px;
-  width: 90%;
-}
-
-.call-popup-content h4 {
-  margin-bottom: 20px;
-  font-size: 1.3rem;
-  color: var(--primary);
-}
-
-.call-popup-content ul {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 20px;
-}
-
-.call-popup-content li {
-  margin-bottom: 15px;
-}
-
-.call-popup-content a {
-  text-decoration: none;
-  font-weight: 600;
-  color: var(--secondary);
-  font-size: 1.1rem;
-  transition: color 0.3s;
-}
-
-.call-popup-content a:hover {
-  color: var(--accent);
-}
-
-.close-call-popup {
-  padding: 10px 25px;
-  background-color: var(--gray);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.close-call-popup:hover {
-  background-color: #4a5568;
-}
-    /* ... styles précédents ... */
-    
-    /* Nouveaux styles pour les cartes de service cliquables */
-    .service-card-link {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      border-radius: 12px;
-      transition: transform 0.3s ease;
-      height: 100%;
-    }
-    
-    .service-card-link:hover {
-      transform: translateY(-5px);
-    }
-    
-    .service-card-link:hover .service-card {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-      border: 2px solid var(--secondary);
-    }
-    
-    .service-card {
-      height: 100%;
-    }
-    
-    /* Ajout d'un indicateur visuel pour les cartes cliquables */
-    .service-card:after {
-      content: "Cliquez pour en savoir plus";
-      display: block;
-      margin-top: 15px;
-      font-size: 0.85rem;
-      color: var(--secondary);
-      font-weight: 600;
-    }
-    
-    /* Styles pour le nouveau service "Reprise" */
-    .service-card.reprise .service-icon {
-      background: rgba(72, 187, 120, 0.1);
-      color: #2b6cb0;
-    }
-    
-    /* Animation de survol pour les liens */
-    .footer-links a:hover {
-      color: var(--secondary);
-      transform: translateX(5px);
-    }
-    
-/* Nouveaux styles pour les cartes de service cliquables */
-.service-card-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  border-radius: 12px;
-  transition: transform 0.3s ease;
-  height: 100%;
-}
-
-.service-card-link:hover {
-  transform: translateY(-5px);
-}
-
-.service-card-link:hover .service-card {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-  border: 2px solid var(--secondary);
-}
-
-.service-card {
-  height: 100%;
-}
-
-/* Ajout d'un indicateur visuel pour les cartes cliquables */
-.service-card:after {
-  content: "Cliquez pour en savoir plus";
-  display: block;
-  margin-top: 15px;
-  font-size: 0.85rem;
-  color: var(--secondary);
-  font-weight: 600;
-}
-
-/* Styles pour le nouveau service "Reprise" */
-.service-card.reprise .service-icon {
-  background: rgba(72, 187, 120, 0.1);
-  color: #2b6cb0;
-}
-
-/* Animation de survol pour les liens */
-.footer-links a:hover {
-  color: var(--secondary);
-  transform: translateX(5px);
-}
-	
   </style>
 </head>
 <body>
 
 <header>
   <div class="header-container">
-    <!-- Modification ici: Ajout d'un ID pour le logo -->
     <div class="logo" id="logo">
       <img src="https://i.imgur.com/hM0DZ3N.png" alt="ElHaji Auto Logo" />
       <div class="logo-text">
@@ -1680,51 +1562,47 @@
     <p>ElHaji Auto propose une gamme complète de services pour répondre à tous vos besoins automobiles</p>
   </div>
   
-<div class="services">
-  <!-- Service 1: Achat de Véhicules -->
-  <a href="#voitures" class="service-card-link" data-section="voitures">
-    <div class="service-card">
-      <div class="service-icon">
-        <i class="fas fa-car"></i>
+  <div class="services">
+    <a href="#voitures" class="service-card-link" data-section="voitures">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-car"></i>
+        </div>
+        <h3>Achat de Véhicules</h3>
+        <p>Découvrez notre large sélection de véhicules neufs et d'occasion, rigoureusement inspectés et garantis.</p>
       </div>
-      <h3>Achat de Véhicules</h3>
-      <p>Découvrez notre large sélection de véhicules neufs et d'occasion, rigoureusement inspectés et garantis.</p>
-    </div>
-  </a>
-  
-  <!-- Service 2: Reprise -->
-  <a href="#contact" class="service-card-link" data-section="contact">
-    <div class="service-card">
-      <div class="service-icon">
-        <i class="fas fa-exchange-alt"></i>
+    </a>
+    
+    <a href="#contact" class="service-card-link" data-section="contact">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        <h3>Reprise</h3>
+        <p>Estimez et vendez votre ancien véhicule rapidement et au meilleur prix</p>
       </div>
-      <h3>Reprise</h3>
-      <p>Estimez et vendez votre ancien véhicule rapidement et au meilleur prix</p>
-    </div>
-  </a>
-  
-  <!-- Service 3: Vendez votre voiture -->
-  <a href="#vendre" class="service-card-link" data-section="vendre">
-    <div class="service-card">
-      <div class="service-icon">
-        <i class="fas fa-hand-holding-usd"></i>
+    </a>
+    
+    <a href="#vendre" class="service-card-link" data-section="vendre">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-hand-holding-usd"></i>
+        </div>
+        <h3>Vendez votre voiture</h3>
+        <p>Estimez et vendez votre voiture au meilleur prix en quelques minutes</p>
       </div>
-      <h3>Vendez votre voiture</h3>
-      <p>Estimez et vendez votre voiture au meilleur prix en quelques minutes</p>
-    </div>
-  </a>
-  
-  <!-- Service 4: Notre garage de mécanicien -->
-  <a href="https://maps.app.goo.gl/u8FNrfQ3N8Pwy8RM8" target="_blank" class="service-card-link">
-    <div class="service-card">
-      <div class="service-icon">
-        <i class="fas fa-tools"></i>
+    </a>
+    
+    <a href="https://maps.app.goo.gl/u8FNrfQ3N8Pwy8RM8" target="_blank" class="service-card-link">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <h3>Notre garage de mécanicien</h3>
+        <p>Atelier équipé avec des techniciens experts pour l'entretien et la réparation de votre véhicule.</p>
       </div>
-      <h3>Notre garage de mécanicien</h3>
-      <p>Atelier équipé avec des techniciens experts pour l'entretien et la réparation de votre véhicule.</p>
-    </div>
-  </a>
-</div>
+    </a>
+  </div>
 </section>
 
 <section id="voitures" class="section">
@@ -1734,13 +1612,9 @@
   </div>
   
   <div class="cars-container">
-    <div class="cars" id="carList">
-      <!-- Cars cards injected by JS -->
-    </div>
+    <div class="cars" id="carList"></div>
     
-    <div class="pagination" id="pagination">
-      <!-- Pagination injected by JS -->
-    </div>
+    <div class="pagination" id="pagination"></div>
   </div>
 </section>
 
@@ -1937,21 +1811,20 @@
         </div>
       </div>
       
-<div class="social-links">
-  <a href="https://facebook.com/elhajiauto" target="_blank" aria-label="Facebook">
-    <i class="fab fa-facebook-f"></i>
-  </a>
-  <a href="https://instagram.com/elhajiauto" target="_blank" aria-label="Instagram">
-    <i class="fab fa-instagram"></i>
-  </a>
-  <a href="https://wa.me/212658629841" target="_blank" aria-label="WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-  <a href="https://tiktok.com/@elhajiauto" target="_blank" aria-label="TikTok">
-    <i class="fab fa-tiktok"></i>
-  </a>
-</div>
-
+      <div class="social-links">
+        <a href="https://facebook.com/elhajiauto" target="_blank" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com/elhajiauto" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/212658629841" target="_blank" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://tiktok.com/@elhajiauto" target="_blank" aria-label="TikTok">
+          <i class="fab fa-tiktok"></i>
+        </a>
+      </div>
     </div>
     
     <div class="contact-form">
@@ -1998,13 +1871,12 @@
     <div class="footer-col">
       <h4>ElHaji Auto</h4>
       <p>Votre concessionnaire automobile de confiance au Maroc depuis 2010, offrant une sélection premium de véhicules neufs et d'occasion.</p>
-<div class="footer-social">
-  <a href="https://facebook.com/elhajiauto" target="_blank"><i class="fab fa-facebook-f"></i></a>
-  <a href="https://instagram.com/elhajiauto" target="_blank"><i class="fab fa-instagram"></i></a>
-  <a href="https://wa.me/212658629841" target="_blank"><i class="fab fa-whatsapp"></i></a>
-  <a href="https://tiktok.com/@elhajiauto" target="_blank"><i class="fab fa-tiktok"></i></a>
-</div>
-
+      <div class="footer-social">
+        <a href="https://facebook.com/elhajiauto" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com/elhajiauto" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/212658629841" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://tiktok.com/@elhajiauto" target="_blank"><i class="fab fa-tiktok"></i></a>
+      </div>
     </div>
     
     <div class="footer-col">
@@ -2021,13 +1893,12 @@
     
     <div class="footer-col">
       <h4>Nos Services</h4>
-<ul class="footer-links">
-  <li><a href="#voitures" data-section="voitures"><i class="fas fa-chevron-right"></i> Achat de véhicules</a></li>
-  <li><a href="#contact" data-section="contact"><i class="fas fa-chevron-right"></i> Reprise</a></li>
-  <li><a href="#vendre" data-section="vendre"><i class="fas fa-chevron-right"></i> Vendez votre voiture</a></li>
-  <li><a href="https://maps.app.goo.gl/u8FNrfQ3N8Pwy8RM8" target="_blank"><i class="fas fa-chevron-right"></i> Notre garage de mécanicien</a></li>
-</ul>
-
+      <ul class="footer-links">
+        <li><a href="#voitures" data-section="voitures"><i class="fas fa-chevron-right"></i> Achat de véhicules</a></li>
+        <li><a href="#contact" data-section="contact"><i class="fas fa-chevron-right"></i> Reprise</a></li>
+        <li><a href="#vendre" data-section="vendre"><i class="fas fa-chevron-right"></i> Vendez votre voiture</a></li>
+        <li><a href="https://maps.app.goo.gl/u8FNrfQ3N8Pwy8RM8" target="_blank"><i class="fas fa-chevron-right"></i> Notre garage de mécanicien</a></li>
+      </ul>
     </div>
     
     <div class="footer-col">
@@ -2046,7 +1917,6 @@
   </div>
 </footer>
 
-<!-- Modal for car details -->
 <div id="carModal" class="modal" onclick="closeModal(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
     <span class="modal-close" onclick="closeModal(event)">&times;</span>
@@ -2056,26 +1926,25 @@
     </div>
     <div class="modal-main">
       <div class="modal-images">
-        <div class="main-image" id="mainImageContainer">
-          <!-- Contenu dynamique ajouté par JavaScript -->
-        </div>
+        <div class="main-image" id="mainImageContainer"></div>
         <div class="thumbnails" id="thumbnails"></div>
       </div>
       <div class="modal-info">
         <div class="car-specs" id="carSpecs"></div>
         <div class="modal-description" id="carDescription"></div>
         <div class="modal-actions">
-		<div class="modal-actions">
-  <a href="https://wa.me/212658629841" target="_blank" class="modal-btn btn-contact">
-    <i class="fab fa-whatsapp"></i> WhatsApp
-  </a>
-
-  <button onclick="toggleCallPopup()" class="modal-btn btn-contact">
-    <i class="fas fa-phone"></i> Appelle-moi
-  </button>
+          <a href="https://wa.me/212658629841" target="_blank" class="modal-btn btn-contact">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </a>
+          <button onclick="toggleCallPopup()" class="modal-btn btn-contact">
+            <i class="fas fa-phone"></i> Appelle-moi
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- 📞 Popup des numéros -->
 <div id="callPopup" class="call-popup">
   <div class="call-popup-content">
     <h4>Choisissez un numéro :</h4>
@@ -2085,12 +1954,6 @@
       <li><a href="tel:0663080262"><i class="fas fa-phone-alt"></i> 0663 08 02 62</a></li>
     </ul>
     <button onclick="toggleCallPopup()" class="close-call-popup">Fermer</button>
-  </div>
-</div>
-
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -2118,7 +1981,7 @@
   const sellRequestsCollection = db.collection("sellRequests");
   const contactMessagesCollection = db.collection("contactMessages");
 
-  // Clé API ImgBB - À REMPLACER PAR VOTRE CLÉ
+  // Clé API ImgBB
   const IMGBB_API_KEY = "e1deb8db84872a7a98bb2afa34bf4938";
 
   // Fonction pour uploader une image sur ImgBB
@@ -2518,7 +2381,7 @@
     }
   });
 
-  // Formulaire pour vendre sa voiture - VERSION AVEC IMGBB
+  // Formulaire pour vendre sa voiture
   document.getElementById("sellCarForm").addEventListener("submit", async function(e) {
     e.preventDefault();
     
@@ -2614,23 +2477,25 @@
     }, 5000);
   }
 
-  // Navigation event listeners
-  document.querySelectorAll("nav a, .footer-links a, .hero-buttons button").forEach(element => {
-    element.addEventListener("click", function(e) {
-      e.preventDefault();
-      const sectionId = this.getAttribute("data-section");
-      if (sectionId) {
-        showSection(sectionId);
-      }
-    });
-  });
-
   // Fonction pour afficher/masquer le popup d'appel
   function toggleCallPopup() {
     const popup = document.getElementById("callPopup");
     const isVisible = popup.style.display === "flex";
     popup.style.display = isVisible ? "none" : "flex";
   }
+
+  // Navigation event listeners
+  document.querySelectorAll("nav a, .footer-links a, .hero-buttons button, .service-card-link").forEach(element => {
+    element.addEventListener("click", function(e) {
+      if (this.hasAttribute("data-section")) {
+        e.preventDefault();
+        const sectionId = this.getAttribute("data-section");
+        if (sectionId) {
+          showSection(sectionId);
+        }
+      }
+    });
+  });
 
   // Initialisation
   window.onload = async () => {
@@ -2645,18 +2510,6 @@
       showSection("accueil");
     });
   };
-  document.querySelectorAll("nav a, .footer-links a, .hero-buttons button, .service-card-link").forEach(element => {
-  element.addEventListener("click", function(e) {
-    if (this.hasAttribute("data-section")) {
-      e.preventDefault();
-      const sectionId = this.getAttribute("data-section");
-      if (sectionId) {
-        showSection(sectionId);
-      }
-    }
-  });
-});
 </script>
-
 </body>
 </html>
