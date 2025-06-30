@@ -2025,6 +2025,17 @@
       querySnapshot.forEach(doc => {
         cars.push({ id: doc.id, ...doc.data() });
       });
+      
+      // Trier les voitures: disponibles d'abord, puis vendues
+      cars.sort((a, b) => {
+        // Si a est disponible et b est vendue, a vient en premier
+        if (a.status !== 'vendue' && b.status === 'vendue') return -1;
+        // Si a est vendue et b est disponible, b vient en premier
+        if (a.status === 'vendue' && b.status !== 'vendue') return 1;
+        // Sinon, conserver l'ordre d'origine
+        return 0;
+      });
+      
       return cars;
     });
   }
